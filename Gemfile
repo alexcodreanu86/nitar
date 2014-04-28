@@ -32,6 +32,37 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :production do 
+  gem "pg"
+  gem "unicorn"
+end
+
+
+group :development, :test do
+  gem 'pry'
+  gem 'pry-nav'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'shoulda-matchers'
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
+  gem 'database_cleaner'
+  gem 'coveralls', require: false
+end
+
+gem 'devise'
+gem 'jquery-ui-rails'
+
+
+
+
+  
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

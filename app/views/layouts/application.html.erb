@@ -8,6 +8,14 @@
 </head>
 <body>
 
+<% if notice %>
+  <p class="flash notice"><%= notice %></p>
+<% elsif alert %>
+  <p class="flash alert"><%= alert %></p>
+<% end %>
+
+
+
 <%= yield %>
 
 </body>
