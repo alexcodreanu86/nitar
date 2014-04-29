@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="">
+    <%= form_tag("/rates/quote", method: "GET", role: 'form') do  %>
+      <div class="form-group"><%= select_tag(:trip_type, options_for_select(@trip_types)) %></div>
+      <div class="form-group"><%= select_tag(:airport, options_for_select([["Choose an Airport", 0], ["Chicago O'hare (ORD)", 1], ["Chicago Midway (MDW)", 2]])) %></div>
+      <div class="form-group"><%= select_tag(:city_id, options_for_select(@rates)) %></div>
+      <div class="form-group"><%= submit_tag "Request quote", class: "btn btn-default disabled" %></div>
+    <% end %>
+  </div>
+</div>
