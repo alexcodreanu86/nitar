@@ -15,9 +15,9 @@ class Rate < ActiveRecord::Base
     end
 
     if params[:car_type] == "2"
-      @price *= 1.3
+      @price *= 1.2
     elsif params[:car_type] == "3"
-      @price *= 1.8
+      @price *= 1.3
     end
 
     @price.to_i
