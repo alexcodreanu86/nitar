@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140429045220) do
+ActiveRecord::Schema.define(version: 20140430011400) do
+
+  create_table "hourly_rates", force: true do |t|
+    t.string   "car_type"
+    t.integer  "price_per_hour"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "rates", force: true do |t|
     t.string   "city_name"

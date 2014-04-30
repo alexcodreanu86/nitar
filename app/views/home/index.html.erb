@@ -1,19 +1,75 @@
 <div class="row">
   <div class="col-lg-3 col-md-5 col-sm-6 col-xs-9">
     <%= form_tag("/rates/quote", method: "GET", role: 'form') do  %>
-      <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types), {class: "form-control input-sm"}%>
+      <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types), {class: "form-control input-sm", onchange: "typeSelection(this.value)"}%>
       </div>
 
-      <div class="form-group"><%= select_tag :airport, options_for_select([["Choose an Airport", 0], ["Chicago O'hare (ORD)", 1], ["Chicago Midway (MDW)", 2]]), {class: "form-control input-sm"} %>
+      <div class="form-group"><%= select_tag :airport, options_for_select([["Choose an Airport", 0], ["Chicago O'hare (ORD)", 1], ["Chicago Midway (MDW)", 2]]), {class: "form-control input-sm", onchange: "checkSelections(this)"} %>
       </div>
 
-      <div class="form-group"><%= select_tag :city_id, options_for_select(@rates), {class: "form-control input-sm"} %>
+      <div class="form-group"><%= select_tag :city_id, options_for_select(@rates), {class: "form-control input-sm", onchange: "checkSelections(this)"} %>
       </div>
       
       <div class="form-group">
-        <%= select_tag :car_type, options_for_select(@cars), {class: "form-control input-sm"} %>
+        <%= select_tag :car_type, options_for_select(@cars), {class: "form-control input-sm",onchange: "carSelection(this.value)" } %>
       </div>
+
       <div class="form-group"><%= submit_tag "Request quote", class: "btn btn-default btn-sm" %></div>
     <% end %>
+    <div class="price-response"></div>
   </div>
 </div>
+
+<script type="text/javascript">
+  var checker = new FormChecker();
+
+  function checkSelections(element){
+    var selectedValue = element.value
+    $(".price-response").html("<h1>1000$</h1>")
+  }
+
+  function carSelection(element){
+    checker.carType = Number(element);
+    checker.checkFormStatus();
+  }
+
+  function typeSelection(choice){
+    var result = Number(choice)
+    checker.tripType = result;
+
+    if (result > 4){
+      $("#airport").hide(170);
+
+      if (result == 6){
+        $("#city_id").hide(170);
+      } else {
+        $("#city_id").show(170);
+      }
+
+    } else if (result > 0) {
+      $("#airport").show(170);
+      $("#city_id").show(170);
+    }
+    checker.checkFormStatus();
+  }
+
+  function FormChecker(){
+    this.tripType;
+    this.airport;
+    this.cityId;
+    this.carType;
+
+    this.checkFormStatus = function(){
+      if (this.tripType == 6 && this.carType > 0){
+        getHourlyQuote();
+      }
+    }
+
+    var getHourlyQuote = function(){
+      
+    }
+  }
+
+
+
+</script>

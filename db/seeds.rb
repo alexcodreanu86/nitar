@@ -9,4 +9,8 @@ require 'csv'
   Rate.create(params)
 end
 
+HourlyRate.create(car_type: "Sedan", price_per_hour: 60)
+HourlyRate.create(car_type: "Suv", price_per_hour: 85)
+HourlyRate.create(car_type: "Luxury Sedan", price_per_hour: 100)
+
 puts "Seeding completed"

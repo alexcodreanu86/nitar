@@ -5,6 +5,8 @@ SpartanLimo::Application.routes.draw do
 
 
   root to: "home#index"
+  resources :rates
+  resources :hourly_rates
   
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
