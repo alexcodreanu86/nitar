@@ -5,11 +5,12 @@ class Rate < ActiveRecord::Base
 
     if (1..4).cover? params[:trip_type].to_i
       @price = params[:airport] == "1" ? @rate.o_hare_price : @rate.midway_price
-      if params[:trip_type]  == 2
+      if params[:trip_type]  == "2"
         @price += 30
-      elsif params[:trip_type] == 3
+      elsif params[:trip_type] == "3"
         @price += 45
       end
+      @price += 4 if params[:trip_type] != "4"
     else
       @price = @rate.chicago_price
     end
