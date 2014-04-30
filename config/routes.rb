@@ -5,7 +5,11 @@ SpartanLimo::Application.routes.draw do
 
 
   root to: "home#index"
+
+  get "/rates/calculate", to: "rates#calculate", as: "calculate_rate"
   resources :rates
+
+  get "/hourly_rates/hourly_quote", to: "hourly_rates#hourly_quote", as: "hourly_quote"
   resources :hourly_rates
   
   # You can have the root of your site routed with "root"
