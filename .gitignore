@@ -14,3 +14,17 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+
+/.bundle
+
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/log/*.log
+/tmp
+/db/schema.rb
+/public/assets
+/public/system
+chestii
+/upload
+GEMFILE.lock
