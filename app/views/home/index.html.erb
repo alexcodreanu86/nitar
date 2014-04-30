@@ -1,19 +1,19 @@
 <div class="row">
   <div class="col-lg-3 col-md-5 col-sm-6 col-xs-9">
     <%= form_tag("/rates/quote", method: "GET", role: 'form', id: "instant-quote") do  %>
-      <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types), {class: "form-control input-sm", onchange: "typeSelection(this.value)"}%>
+      <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types), {class: "form-control input-sm", onchange: "typeSelection(this)"}%>
       </div>
 
-      <div class="form-group"><%= select_tag :airport, options_for_select([["Choose an Airport", 0], ["Chicago O'hare (ORD)", 1], ["Chicago Midway (MDW)", 2]]), {class: "form-control input-sm", onchange: "checkSelections(this)"} %>
+      <div class="form-group"><%= select_tag :airport, options_for_select([["Choose an Airport", 0], ["Chicago O'hare (ORD)", 1], ["Chicago Midway (MDW)", 2]]), {class: "form-control input-sm", onchange: "setSelection('airport', this)"} %>
       </div>
 
-      <div class="form-group"><%= select_tag :city_id, options_for_select(@rates), {class: "form-control input-sm", onchange: "checkSelections(this)"} %>
+      <div class="form-group"><%= select_tag :city_id, options_for_select(@rates), {class: "form-control input-sm", onchange: "setSelection('cityId', this)"} %>
       </div>
 
-      <div class="form-group"><%=select_tag :hours, options_for_select([["How Many Hours", -1], ["2:00", 2], ["2:30", 2.5], ["3:00", 3], ["3:30", 3.5], ["4:00", 4], ["4:30", 4.5], ["5:00", 5], ["5:30", 5.5], ["6:00", 6], ["6:30", 6.5], ["7:00", 7], ["7:30", 7.5], ["8:00", 8], ["8:30", 8.5], ["9:00", 9], ["9:30", 9.5], ["10:00", 10], ["10:30", 10.5], ["11:00", 11], ["11:30", 11.5], ["12:00", 12], ["13:00", 13], ["14:00", 14], ["15:00", 15], ["16:00", 16], ["17:00", 17], ["18:00", 18], ["19:00", 19], ["20:00", 20], ["21:00", 21], ["22:00", 22], ["23:00", 23], ["24:00", 24]]), {class: "form-control input-sm", onchange: "checkHours(this.value)"} %></div>
+      <div class="form-group"><%=select_tag :hours, options_for_select([["How Many Hours", -1], ["2:00", 2], ["2:30", 2.5], ["3:00", 3], ["3:30", 3.5], ["4:00", 4], ["4:30", 4.5], ["5:00", 5], ["5:30", 5.5], ["6:00", 6], ["6:30", 6.5], ["7:00", 7], ["7:30", 7.5], ["8:00", 8], ["8:30", 8.5], ["9:00", 9], ["9:30", 9.5], ["10:00", 10], ["10:30", 10.5], ["11:00", 11], ["11:30", 11.5], ["12:00", 12], ["13:00", 13], ["14:00", 14], ["15:00", 15], ["16:00", 16], ["17:00", 17], ["18:00", 18], ["19:00", 19], ["20:00", 20], ["21:00", 21], ["22:00", 22], ["23:00", 23], ["24:00", 24]]), {class: "form-control input-sm", onchange: "setSelection('hours', this)"} %></div>
       
       <div class="form-group">
-        <%= select_tag :car_type, options_for_select(@cars), {class: "form-control input-sm",onchange: "carSelection(this.value)" } %>
+        <%= select_tag :car_type, options_for_select(@cars), {class: "form-control input-sm",onchange: "setSelection('carType', this)" } %>
       </div>
 
       <div class="form-group"><%= submit_tag "Request quote", class: "btn btn-default btn-sm" %></div>
@@ -25,27 +25,37 @@
 <script type="text/javascript">
   var checker = new FormChecker();
   $("#hours").hide();
-  function checkSelections(element){
-    var selectedValue = element.value
-    
-  }
 
   function displayPrice(price){
     $(".price-response").html("<h1>" + price + "$</h1>")
   }
 
-  function checkHours(element){
-    checker.hours = element;
-    checker.checkFormStatus();
+  function clearPrice(){
+    $(".price-response").empty()
   }
 
-  function carSelection(element){
-    checker.carType = Number(element);
+  // function checkAirport(element){
+  //   checker.airport = element.value;
+  //   checker.checkFormStatus();
+  // }
+
+  // function citySelection(element){
+  //   checker.cityId = element.value;
+  //   checker.checkFormStatus();
+  // }
+
+  // function hoursSelection(element){
+  //   checker.hours = element.value;
+  //   checker.checkFormStatus();
+  // }
+
+  function setSelection(selection ,element){
+    checker[selection] = Number(element.value);
     checker.checkFormStatus();
   }
 
   function typeSelection(choice){
-    var result = Number(choice)
+    var result = Number(choice.value)
     checker.tripType = result;
 
     if (result > 4){
@@ -77,17 +87,40 @@
 
     var self = this;
     this.checkFormStatus = function(){
-      if (this.tripType == 6 && this.carType > 0 && this.hours > 1){
-        getHourlyQuote();
+      if (checkHourlyFields()){
+        getQuote("/hourly_rates/hourly_quote");
+      } else if(checkRestOfFields()) {
+        getQuote("/rates/calculate");
+      } else {
+        clearPrice();
       }
     }
 
-    var getHourlyQuote = function(){
+    var checkRestOfFields = function(){
+      var result = false;
+      if (checkAirportRequest()){
+        result = true;
+      } else if(self.tripType == 5 && self.cityId > 0 && self.carType > 0 ) {
+        result = true;
+      }
+      return result;
+    }
+
+    var checkAirportRequest = function(){
+      return (self.tripType <= 4 && self.tripType > 0 && self.cityId > 0 && self.carType > 0 && self.airport > 0)
+    }
+
+    var checkHourlyFields = function(){
+      return (self.tripType == 6 && self.carType > 0 && self.hours > 1)
+    }
+
+    var getQuote = function(url){
       var data = $("#instant-quote").serialize()
-      $.get("/hourly_rates/hourly_quote", data, function(response){
+      $.get(url, data, function(response){
         displayPrice(response.price);
       })
     }
+
   }
 
 

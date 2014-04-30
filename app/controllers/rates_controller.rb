@@ -21,4 +21,11 @@ class RatesController < ApplicationController
   def destroy
   end
 
+  def calculate
+    @price = Rate.calculate(params)
+    if request.xhr? 
+      render json: {price: @price}
+    end
+  end
+
 end
