@@ -8,7 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # Custom fields
       t.string :first_name
       t.string :last_name
-      t.boolean :is_admin
+      t.boolean :is_admin, default: false
       
       ## Recoverable
       t.string   :reset_password_token

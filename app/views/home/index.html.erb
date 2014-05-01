@@ -5,13 +5,8 @@
 </div>
 
 <div class="span3">
-  <div class="well sidebar-nav">
+  <div class="well sidebar-nav" align="center">
     <h3>Sidebar</h3>
-        
-      
-
-
-
     <%= form_tag("/rates/quote", method: "GET", role: 'form', id: "instant-quote") do  %>
       <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types), {class: "form-control input-sm", onchange: "typeSelection(this)"}%>
       </div>
@@ -28,7 +23,7 @@
         <%= select_tag :car_type, options_for_select(@cars), {class: "form-control input-sm",onchange: "setSelection('carType', this)" } %>
       </div>
 
-      <div class="form-group"><%= submit_tag "Request quote", class: "btn btn-default btn-sm" %></div>
+      <!--<div class="form-group"><%= submit_tag "Request quote", class: "btn btn-default btn-sm" %></div>-->
     <% end %>
     <div class="price-response"></div>
 
