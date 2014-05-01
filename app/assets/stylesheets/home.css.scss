@@ -1,3 +1,14 @@
+body {
+  background-image: url('city_image_light.jpeg');
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
+  // background-position:right top;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+
 .nav {
   line-height: 5.1em;
   margin-bottom: 2em;
