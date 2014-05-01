@@ -68,12 +68,17 @@ li.right {
   -webkit-box-shadow: -7px 7px 5px 0px rgba(50, 50, 50, 0.75);
   -moz-box-shadow:    -7px 7px 5px 0px rgba(50, 50, 50, 0.75);
   box-shadow:         -7px 7px 5px 0px rgba(50, 50, 50, 0.75);
-  background-color: #6F9CBD;
+  background-color: rgba(111, 156, 189, 0.8);
+  border-color: rgba(111, 156, 189, 1);
 
   .form-control {
     -webkit-box-shadow: -5px 5px 5px 0px rgba(50, 50, 50, 0.75);
-  -moz-box-shadow:    -5px 5px 5px 0px rgba(50, 50, 50, 0.75);
-  box-shadow:         -5px 5px 5px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    -5px 5px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         -5px 5px 5px 0px rgba(50, 50, 50, 0.75);
   }
+}
+
+.jumbotron{
+  // background: #aaa;
 }
 
