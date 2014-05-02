@@ -3,7 +3,8 @@ function displayPrice(price){
 }
 
 function clearPrice(){
-  $(".price-response").empty()
+  $(".price-response").empty();
+  $('#generator-button').addClass("hidden")
 }
 
 function setSelection(selection ,element){
@@ -45,12 +46,18 @@ function FormChecker(){
   var self = this;
   this.checkFormStatus = function(){
     if (checkHourlyFields()){
-      getQuote("/hourly_rates/hourly_quote");
+      getQuote("/rates/hourly_quote");
+      showButton();
     } else if(checkRestOfFields()) {
       getQuote("/rates/calculate");
+      showButton();
     } else {
       clearPrice();
     }
+  }
+
+  function showButton(){
+    $('#generator-button').removeClass("hidden")
   }
 
   var checkRestOfFields = function(){
