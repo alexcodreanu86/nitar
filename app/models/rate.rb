@@ -1,6 +1,6 @@
 class Rate < ActiveRecord::Base
 
-  def self.calculate(params)
+  def self.calculate(params, ratio)
     @rate = self.where(id: params[:city_id]).first
 
     if (1..4).cover? params[:trip_type].to_i
@@ -14,11 +14,7 @@ class Rate < ActiveRecord::Base
       @price = @rate.chicago_price
     end
 
-    if params[:car_type].to_i == 2
-      @price *= 1.2
-    elsif params[:car_type].to_i == 3
-      @price *= 1.3
-    end
+    @price *= ratio
 
     @price.to_i
   end

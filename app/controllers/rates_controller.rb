@@ -21,8 +21,17 @@ class RatesController < ApplicationController
   def destroy
   end
 
+  def hourly_quote
+    @rate = Car.find(params[:car_id]).hourly_rate
+    @price = (@rate * params[:hours].to_f).to_i
+    if request.xhr?
+      render json: {price: @price}
+    end
+  end
+
   def calculate
-    @price = Rate.calculate(params)
+    @car_ratio = Car.where(id: params[:car_id]).select(:price_ratio).first.price_ratio
+    @price = Rate.calculate(params, @car_ratio)
     if request.xhr? 
       render json: {price: @price}
     end
