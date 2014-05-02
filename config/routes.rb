@@ -1,5 +1,9 @@
 SpartanLimo::Application.routes.draw do
   devise_for :users
+
+  resources :users , only: [:index, :show, :destroy] do 
+    resources :trips
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -12,9 +16,8 @@ SpartanLimo::Application.routes.draw do
   resources :hourly_rates
 
   
-  get "/users", to: "users#index", as: "users"
-  get "/users/:id", to: "users#show", as: "user"
-
+  
+  
 
 
 
