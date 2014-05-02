@@ -10,10 +10,9 @@ SpartanLimo::Application.routes.draw do
   root to: "home#index"
 
   get "/rates/calculate", to: "rates#calculate", as: "calculate_rate"
+  get "/rates/hourly_quote", to: "rates#hourly_quote", as: "hourly_quote"
   resources :rates
 
-  get "/hourly_rates/hourly_quote", to: "hourly_rates#hourly_quote", as: "hourly_quote"
-  resources :hourly_rates
 
   
   

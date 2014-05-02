@@ -46,7 +46,7 @@ function FormChecker(){
   var self = this;
   this.checkFormStatus = function(){
     if (checkHourlyFields()){
-      getQuote("/hourly_rates/hourly_quote");
+      getQuote("/rates/hourly_quote");
       showButton();
     } else if(checkRestOfFields()) {
       getQuote("/rates/calculate");

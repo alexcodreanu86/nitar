@@ -9,8 +9,8 @@ require 'csv'
   Rate.create(params)
 end
 
-HourlyRate.create(car_type: "Sedan", price_per_hour: 55)
-HourlyRate.create(car_type: "Suv", price_per_hour: 75)
-HourlyRate.create(car_type: "Luxury Sedan", price_per_hour: 85)
+Car.create(name: "Sedan", price_ratio: 1, hourly_rate: 55, capacity: 3)
+Car.create(name: "Private Suv", price_ratio: 1.2, hourly_rate: 75, capacity: 6)
+Car.create(name: "Luxury Black Car", price_ratio: 1.3, hourly_rate: 85, capacity: 3)
 
 puts "Seeding completed"
