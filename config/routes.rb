@@ -1,7 +1,7 @@
 SpartanLimo::Application.routes.draw do
   devise_for :users
 
-  resources :users , only: [:index, :show, :destroy] do 
+  resources :users, only: [:index, :show, :destroy] do 
     resources :trips
   end
   # The priority is based upon order of creation: first created -> highest priority.
@@ -11,12 +11,11 @@ SpartanLimo::Application.routes.draw do
 
   get "/rates/calculate", to: "rates#calculate", as: "calculate_rate"
   get "/rates/hourly_quote", to: "rates#hourly_quote", as: "hourly_quote"
+  
   resources :rates
+  resources :cars
 
 
-  
-  
-  
 
 
 
