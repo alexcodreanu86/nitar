@@ -20,39 +20,42 @@ function typeSelection(choice){
     $("#airport").fadeOut(200);
 
     if (result == 6){
-      $("#city_id").hide();
+      $("#rate_id").hide();
       $("#hours").show();
     } else {
-      $("#city_id").show();
+      $("#rate_id").show();
       $("#hours").hide();
     }
 
   } else if (result > 0) {
     $("#airport").show(170);
-    $("#city_id").show();
+    $("#rate_id").show();
     $("#hours").hide();
 
   }
   checker.checkFormStatus();
 }
 
-function FormChecker(){
+function FormChecker(shouldCheck){
   this.tripType;
   this.airport;
-  this.cityId;
+  this.rateId;
   this.carType;
   this.hours;
+  this.shouldCheck = shouldCheck;
 
   var self = this;
   this.checkFormStatus = function(){
-    if (checkHourlyFields()){
-      getQuote("/rates/hourly_quote");
-      showButton();
-    } else if(checkRestOfFields()) {
-      getQuote("/rates/calculate");
-      showButton();
-    } else {
-      clearPrice();
+    if (this.shouldCheck){
+      if (checkHourlyFields()){
+        getQuote("/rates/hourly_quote");
+        showButton();
+      } else if(checkRestOfFields()) {
+        getQuote("/rates/calculate");
+        showButton();
+      } else {
+        clearPrice();
+      }
     }
   }
 
@@ -64,14 +67,14 @@ function FormChecker(){
     var result = false;
     if (checkAirportRequest()){
       result = true;
-    } else if(self.tripType == 5 && self.cityId > 0 && self.carType > 0 ) {
+    } else if(self.tripType == 5 && self.rateId > 0 && self.carType > 0 ) {
       result = true;
     }
     return result;
   }
 
   var checkAirportRequest = function(){
-    return (self.tripType <= 4 && self.tripType > 0 && self.cityId > 0 && self.carType > 0 && self.airport > 0)
+    return (self.tripType <= 4 && self.tripType > 0 && self.rateId > 0 && self.carType > 0 && self.airport > 0)
   }
 
   var checkHourlyFields = function(){

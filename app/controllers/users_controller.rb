@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :current_admin?, only: [:index]
-  before_filter :authorized_user?, only: [:show]
+  # before_filter :current_admin?, only: [:index]
+  # before_filter :authorized_user?, only: [:show]
   def show
     @user = User.where(id: params[:id]).first
     redirect_to root_path if !@user
