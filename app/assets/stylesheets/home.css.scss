@@ -95,4 +95,16 @@ li.right {
   }
 }
 
+#generator-button {
+  background-color: #C92913;
+  -webkit-box-shadow: -5px 5px 5px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    -5px 5px 5px 0px rgba(50, 50, 50, 0.75);
+  box-shadow:         -5px 5px 5px 0px rgba(50, 50, 50, 0.75);
+  color: white;
+  margin-top: 1em;
+  &:hover {
+    background-color: red;
+  }
+}
+
 
