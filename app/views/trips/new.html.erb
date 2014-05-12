@@ -2,35 +2,56 @@
   <div class="well sidebar-nav">
     <h1>Please fill out all the required fields </h1>
     <div class="row">
-    <div class="col-lg-5">
       <%= form_for [current_user, @trip], role: 'form' do |f| %>
-        <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types, @trip.trip_type), {class: "form-control input-sm", onchange: "typeSelection(this)"}%>
+        <div class="col-lg-5">
+          <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types, @trip.trip_type), {class: "form-control input-sm", onchange: "console.log(this.value)"}%></div>
+
+          <div class="form-group"><%= select_tag :airport, options_for_select(@airports, @trip.airport), {class: "form-control input-sm"} %>
+          </div>
+
+          <div class="form-group"><%= select_tag :rate_id, options_for_select(@rates, @trip.rate_id), {class: "form-control input-sm"} %>
+          </div>
+
+          <div class="form-group"><%=select_tag :hours, options_for_select(@hours, @trip.hours), {class: "form-control input-sm"} %></div> 
+          <div class="form-group">
+            <%= select_tag :car_id, options_for_select(@cars, @trip.car_id), {class: "form-control input-sm"} %>
+          </div>
+
+          <div class="form-group">
+            <%= select_tag :number_of_passengers, options_for_select(@passengers, @trip.number_of_passengers), {class: "form-control input-sm"} %>
+          </div>
+
+          <div><%= f.label :pickup_time %></div>
+          <div class="form-group"><%= f.datetime_local_field :pickup_time, class: "form-control input-sm" %></div>
         </div>
 
-        <div class="form-group"><%= select_tag :airport, options_for_select(@airports, @trip.airport), {class: "form-control input-sm", onchange: "setSelection('airport', this)"} %>
+        <div class="col-lg-6 col-lg-offset-1">
+          <div><%= f.label :pick_up, "Pick up information" %></div>
+          <div class="form-group"><%= f.text_field :pick_up, class: "form-control input-sm" %></div>
+
+          <div><%= f.label :drop_off, "Drop off information" %></div>
+          <div class="form-group"><%= f.text_field :drop_off, class: "form-control input-sm" %></div>
+
+          <div><%= f.label :description, 'Anything else that we should know' %></div>
+          <div class="form-group"><%= f.text_area :description, cols: 40, rows: 4, class: "form-control input-sm" %></div> 
         </div>
 
-        <div class="form-group"><%= select_tag :rate_id, options_for_select(@rates, @trip.rate_id), {class: "form-control input-sm", onchange: "setSelection('rateId', this)"} %>
-        </div>
 
-        <div class="form-group"><%=select_tag :hours, options_for_select(@hours, @trip.hours), {class: "form-control input-sm", onchange: "setSelection('hours', this)"} %></div> 
-        <div class="form-group">
-          <%= select_tag :car_id, options_for_select(@cars, @trip.car_id), {class: "form-control input-sm",onchange: "setSelection('carType', this)" } %>
-        </div>
-
-        <div class="form-group"><%= submit_tag "Submit Reservation", class: "btn btn-default btn-lg", id: "trip-button" %></div>
+          <div class="form-group"><%= submit_tag "Submit Reservation", class: "btn btn-default btn-lg", id: "trip-button" %></div>
       <% end %>
-      </div>
     </div>
   </div>
 </div>
 <script type="text/javascript">
-var checker = new FormChecker(false);
-
 <% if @trip.trip_type == 6 %>
   $('#airport').hide();
   $('#rate_id').hide();
 <% else %>
   $("#hours").hide();
 <% end %>
+
+  /************************************/
+
+
+
 </script>
