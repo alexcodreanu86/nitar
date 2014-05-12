@@ -4,7 +4,8 @@ class CreateTrips < ActiveRecord::Migration
       t.belongs_to :user
       t.belongs_to :car
       t.belongs_to :rate
-      t.string :customer_name
+      t.string :contact_name
+      t.string :contact_phone
       t.integer :number_of_passengers
       t.string :pick_up
       t.string :drop_off

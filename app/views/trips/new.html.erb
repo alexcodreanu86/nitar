@@ -4,7 +4,7 @@
     <div class="row">
       <%= form_for [current_user, @trip], role: 'form' do |f| %>
         <div class="col-lg-5">
-          <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types, @trip.trip_type), {class: "form-control input-sm", onchange: "console.log(this.value)"}%></div>
+          <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types, @trip.trip_type), {class: "form-control input-sm", onchange: "checkTripType(this.value)"}%></div>
 
           <div class="form-group"><%= select_tag :airport, options_for_select(@airports, @trip.airport), {class: "form-control input-sm"} %>
           </div>
@@ -27,13 +27,13 @@
 
         <div class="col-lg-6 col-lg-offset-1">
           <div><%= f.label :pick_up, "Pick up information" %></div>
-          <div class="form-group"><%= f.text_field :pick_up, class: "form-control input-sm" %></div>
+          <div class="form-group"><%= f.text_field :pick_up, class: "form-control input-sm", placeholder: "e.g. 1 S. Dearbord Chicago IL or American Airlines 170 " %></div>
 
           <div><%= f.label :drop_off, "Drop off information" %></div>
-          <div class="form-group"><%= f.text_field :drop_off, class: "form-control input-sm" %></div>
+          <div class="form-group"><%= f.text_field :drop_off, class: "form-control input-sm", placeholder: "e.g. 1 S. Dearbord Chicago IL or American Airlines 170 " %></div>
 
           <div><%= f.label :description, 'Anything else that we should know' %></div>
-          <div class="form-group"><%= f.text_area :description, cols: 40, rows: 4, class: "form-control input-sm" %></div> 
+          <div class="form-group"><%= f.text_area :description, cols: 40, rows: 4, class: "form-control input-sm"%></div> 
         </div>
 
 
@@ -51,7 +51,8 @@
 <% end %>
 
   /************************************/
-
-
+  function checkTripType(value){
+    console.log(value)
+  }
 
 </script>
