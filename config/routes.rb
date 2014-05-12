@@ -1,6 +1,8 @@
 SpartanLimo::Application.routes.draw do
   devise_for :users
-
+  
+  get "trips/new_from_generator", to: "trips#new_from_generator", as: "new_trip_from_generator"
+  post "trips/create_non_user_trip",to: "trips#non_user_create", as: "trips"
   resources :users, only: [:index, :show, :destroy] do 
     resources :trips
   end
