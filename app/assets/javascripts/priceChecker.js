@@ -36,26 +36,23 @@ function typeSelection(choice){
   checker.checkFormStatus();
 }
 
-function FormChecker(shouldCheck){
+function FormChecker(){
   this.tripType;
   this.airport;
   this.rateId;
   this.carType;
   this.hours;
-  this.shouldCheck = shouldCheck;
 
   var self = this;
   this.checkFormStatus = function(){
-    if (this.shouldCheck){
-      if (checkHourlyFields()){
-        getQuote("/rates/hourly_quote");
-        showButton();
-      } else if(checkRestOfFields()) {
-        getQuote("/rates/calculate");
-        showButton();
-      } else {
-        clearPrice();
-      }
+    if (checkHourlyFields()){
+      getQuote("/rates/hourly_quote");
+      showButton();
+    } else if(checkRestOfFields()) {
+      getQuote("/rates/calculate");
+      showButton();
+    } else {
+      clearPrice();
     }
   }
 

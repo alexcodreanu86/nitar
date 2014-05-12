@@ -103,6 +103,12 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="rates" row="id" />
 </row>
+<row name="customer_name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="pickup_time" null="1" autoincrement="0">
+<datatype>DATETIME</datatype>
+<default>NULL</default></row>
 <row name="pick_up" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
