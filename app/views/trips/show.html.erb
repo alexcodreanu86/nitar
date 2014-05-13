@@ -1,1 +1,48 @@
-<h1><%= @trip.contact_name %></h1>
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="well sidebar-nav">
+    <h1>Trip for: <%= @trip.contact_name %></h1>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <td>Pick up date/time:</td><td><%= @trip.pickup_time %></td>
+        </tr>
+
+        <tr>
+          <td>Pick up information:</td><td><%= @trip.pick_up %></td>
+        </tr>
+
+        <tr>
+          <td>Drop off information:</td> <td><%= @trip.drop_off %></td>
+        </tr>
+
+        <% if @trip.airport %>
+          <tr>
+            <td>Airport:</td> <td><%= @trip.airport == 1 ? "Chicago O'hare (ORD)" : "Chicago Midway (MDW)" %></td>
+          </tr>
+        <% elsif @trip.hours%>
+          <tr>
+            <td>Hours booked</td> <td><%= @trip.hours %></td>
+          </tr>
+        <% end %>
+
+        <tr>
+          <td>Number of passengers:</td> <td><%= @trip.number_of_passengers %></td>
+        </tr>
+
+        <tr>
+          <td>Contact phone:</td> <td><%= @trip.contact_phone %></td>
+        </tr>
+
+        <tr>
+          <td>Contact email:</td> <td><%= @trip.contact_email %></td>
+        </tr>
+        <tr>
+          <td>Trip price:</td><td><%= @trip.price %>$</td>
+        </tr>
+      </table>
+    </div>
+    <% if @trip.description %>
+      <p>You have added this extra information to the trip: <br><%= @trip.description %></p>
+    <% end %>
+  </div>
+</div>
