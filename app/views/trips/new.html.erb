@@ -1,56 +1,7 @@
-<div class="col-lg-8 col-lg-offset-2">
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
   <div class="well sidebar-nav">
     <h1>Please fill out all the required fields </h1>
-    <div class="row">
-      <%= form_for [current_user, @trip], role: 'form' do |f| %>
-        <div class="col-lg-5">
-          <p id="airport-tax" class="text-info">Please note that airport pickups will have a 4$ airport tax added to the total.</p>
-          <div><%= f.label :trip_type, "Trip Information:" %></div>
-          <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types, @trip.trip_type), {class: "form-control required input-sm", onchange: "checkTripType(this.value)"}%></div>
-
-          <div class="form-group"><%= select_tag :airport, options_for_select(@airports, @trip.airport), {class: "form-control required input-sm", onblur:"checkFormElementStatus()"} %>
-          </div>
-
-          <div class="form-group"><%= select_tag :rate_id, options_for_select(@rates, @trip.rate_id), {class: "form-control required input-sm", onblur:"checkFormElementStatus()"} %>
-          </div>
-
-          <div class="form-group"><%=select_tag :hours, options_for_select(@hours, @trip.hours), {class: "form-control required input-sm", onblur:"checkFormElementStatus()"} %></div> 
-          <div class="form-group">
-            <%= select_tag :car_id, options_for_select(@cars, @trip.car_id), {class: "form-control required input-sm", onblur:"checkFormElementStatus()"} %>
-          </div>
-
-          <div class="form-group">
-            <%= select_tag :number_of_passengers, options_for_select(@passengers, @trip.number_of_passengers), {class: "form-control required input-sm", onblur:"checkFormElementStatus()"} %>
-          </div>
-
-          <div><%= f.label :pickup_time %></div>
-          <div class="form-group"><%= f.datetime_local_field :pickup_time, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
-          <div><%= f.label :pick_up, "Pick up information" %></div>
-          <div class="form-group"><%= f.text_field :pick_up, class: "form-control required input-sm", placeholder: "e.g. 1 S. Dearbord Chicago IL 60001 or American Airlines 170 ", onblur:"checkFormElementStatus()" %></div>
-
-          <div><%= f.label :drop_off, "Drop off information" %></div>
-          <div class="form-group"><%= f.text_field :drop_off, class: "form-control required input-sm", placeholder: "e.g. 1 S. Dearbord Chicago IL 60001 or American Airlines 170 ", onblur:"checkFormElementStatus()" %></div>
-        </div>
-
-        <div class="col-lg-6 col-lg-offset-1">
-          <div><%= f.label :contact_name, "Contact Name" %></div>
-          <div class="form-group"><%= f.text_field :contact_name, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
-
-          <div><%= f.label :contact_email, "Email" %></div>
-          <div class="form-group"><%= f.email_field :contact_email, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
-
-          <div><%= f.label :contact_phone, "Phone" %></div>
-          <div class="form-group"><%= f.telephone_field :contact_phone, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
-
-          <div><%= f.label :description, 'Anything else that we should know' %></div>
-          <div class="form-group"><%= f.text_area :description, cols: 40, rows: 4, class: "form-control input-sm", onblur:"checkFormElementStatus()"%></div> 
-        </div>
-
-          <div class="row"> 
-            <div class="col-lg-4 col-lg-offset-4"><%= submit_tag "Submit Reservation", class: "btn btn-default btn-lg", id: "trip-button" %></div>
-          </div>
-      <% end %>
-    </div>
+      <%= render "trips/form" %>
   </div>
 </div>
 
