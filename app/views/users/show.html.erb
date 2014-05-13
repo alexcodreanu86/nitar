@@ -1,0 +1,27 @@
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="well shaddowed">
+    <h2>Personal Information:</h2>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="table-responsive">
+          <table class="table">
+            <tr>
+              <td>Name: </td><td><%= @user.name%></td>
+            </tr>
+            <tr>
+              <td>Email: </td><td><%= @user.email %></td>
+            </tr>
+            <tr>
+              <td>Phone number:</td><td><%= @user.phone %></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <%= link_to "Edit Info", edit_user_registration_path, class: "btn red-button" %>
+      </div>
+    </div>
+    <p>List of <%= link_to "Booked Trips", user_trips_path(@user) %></p>
+
+  </div>
+</div>

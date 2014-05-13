@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  # before_filter :current_admin?, only: [:index]
-  # before_filter :authorized_user?, only: [:show]
+  before_filter :authorise_admin, only: [:index]
+  before_filter :authorize_user, only: [:show]
+
   def show
     @user = User.where(id: params[:id]).first
-    redirect_to root_path if !@user
   end
 
 
@@ -12,7 +12,9 @@ class UsersController < ApplicationController
   end
 
   protected
-  def authorized_user?
-    current_admin? || (current_user && current_user.id == params[:id])
+  def authorize_user
+    unless current_admin? || (current_user && current_user.id == params[:id].to_i)
+      unauthorized_user
+    end
   end
 end
