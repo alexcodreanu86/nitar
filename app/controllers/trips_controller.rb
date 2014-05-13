@@ -24,10 +24,12 @@ class TripsController < ApplicationController
   def non_user_create
     @trip = Trip.new(trip_params)
     @car = Car.where(id: @trip.car_id).first
-    if @trip.trip_type == 6
-      @trip.price = @car.hourly_rate * @trip.hours.to_f
-    else
-      @trip.price = Rate.calculate(trip_params, @car.price_ratio)
+    if @car
+      if @trip.trip_type == 6
+        @trip.price = @car.hourly_rate * @trip.hours.to_f
+      else
+        @trip.price = Rate.calculate(trip_params, @car.price_ratio)
+      end
     end
 
     @trip.price += 4 if @trip.trip_type <= 3
@@ -36,7 +38,7 @@ class TripsController < ApplicationController
       flash[:notice] = "Thank you for booking a ride with us. One of our representatives will call you regarding the payment."
       redirect_to @trip
     else
-      flash[:warning] = "Please make sure that you fill out all the required fields!" 
+      flash[:alert] = "Please make sure that you fill out all the required fields!" 
       set_form_variables
       render "new"
     end
@@ -45,17 +47,19 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @car = Car.where(id: @trip.car_id).first
-    if @trip.trip_type == 6
-      @trip.price = @car.hourly_rate * @trip.hours.to_f
-    else
-      @trip.price = Rate.calculate(trip_params, @car.price_ratio)
+    if @car
+      if @trip.trip_type == 6
+        @trip.price = @car.hourly_rate * @trip.hours.to_f
+      else
+        @trip.price = Rate.calculate(trip_params, @car.price_ratio)
+      end
     end
 
     if @trip.save
       flash[:notice] = "Thank you for booking a ride with us. One of our representatives will call you regarding the payment."
       redirect_to @trip
     else
-      flash[:warning] = "Please make sure that you fill out all the required fields!" 
+      flash[:alert] = "Please make sure that you fill out all the required fields!" 
       set_form_variables
       render "new"
     end
