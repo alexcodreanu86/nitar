@@ -8,10 +8,10 @@
 <script type="text/javascript">
   <% if !@trip.trip_type %>
     $("#airport-tax").hide();
-    hourlyTrip();
-  <% elsif @trip.trip_type == 5 %>
+  <% elsif @trip.trip_type.to_i == 5 %>
     pointToPoint();
-  <% elsif @trip.trip_type == 6  %>
+  <% elsif @trip.trip_type.to_i == 6  %>
+    hourlyTrip();
   <% else %>
     airportTrip(<%= @trip.trip_type %>);  
   <% end %>
