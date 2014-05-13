@@ -100,7 +100,7 @@ li.right {
   box-shadow:         -5px 5px 5px 0px rgba(50, 50, 50, 0.75);
 }
 
-#generator-button, #trip-button {
+.book-now-button, #trip-button, .red-button {
   background-color: #C92913;
   -webkit-box-shadow: -5px 5px 5px 0px rgba(50, 50, 50, 0.75);
   -moz-box-shadow:    -5px 5px 5px 0px rgba(50, 50, 50, 0.75);
@@ -110,6 +110,11 @@ li.right {
   &:hover {
     background-color: red;
   }
+}
+
+#fleet-banner {
+  font-size: 1.5em;
+  
 }
 
 
