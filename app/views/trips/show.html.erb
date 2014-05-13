@@ -45,7 +45,7 @@
         </tr>
       </table>
     </div>
-    <% if @trip.description %>
+    <% if @trip.description != "" %>
       <p>You have added this extra information to the trip: <br><%= @trip.description %></p>
     <% end %>
   </div>
