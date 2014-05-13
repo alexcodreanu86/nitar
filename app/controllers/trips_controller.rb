@@ -102,7 +102,7 @@ class TripsController < ApplicationController
   end
 
   def params_from_generator
-    params.permit(:trip_type, :airport, :rate_id, :car_id, :hours)
+    params.permit(:trip_type, :airport, :rate_id, :car_id, :hours, :user_id)
   end
 
   def trip_params
@@ -114,7 +114,7 @@ class TripsController < ApplicationController
     @trip_types = [["Select Service Type", nil],["From airport (Curbside Pick-up)", 1], ["From airport (Greet and meet Domestic)", 2], ["From airport (Greet and meet International)", 3], ["To Airport", 4], ["Chicago to/from Illinois", 5], ["Hourly", 6]]    
     @cars = [["Select Car Type", nil]] + Car.all.order(:id).map{|car| ["#{car.name} (#{car.capacity} pax)", car.id]}
     @airports = [["Choose an Airport", nil], ["Chicago O'hare (ORD)", 1], ["Chicago Midway (MDW)", 2]]
-    @hours = [["How Many Hours", nil], ["2:00", 2], ["2:30", 2.5], ["3:00", 3], ["3:30", 3.5], ["4:00", 4], ["4:30", 4.5], ["5:00", 5], ["5:30", 5.5], ["6:00", 6], ["6:30", 6.5], ["7:00", 7], ["7:30", 7.5], ["8:00", 8], ["8:30", 8.5], ["9:00", 9], ["9:30", 9.5], ["10:00", 10], ["10:30", 10.5], ["11:00", 11], ["11:30", 11.5], ["12:00", 12], ["13:00", 13], ["14:00", 14], ["15:00", 15], ["16:00", 16], ["17:00", 17], ["18:00", 18], ["19:00", 19], ["20:00", 20], ["21:00", 21], ["22:00", 22], ["23:00", 23], ["24:00", 24]]
+    @hours = [["How Many Hours", nil], ["2:00", 2.0], ["2:30", 2.5], ["3:00", 3.0], ["3:30", 3.5], ["4:00", 4.0], ["4:30", 4.5], ["5:00", 5.0], ["5:30", 5.5], ["6:00", 6.0], ["6:30", 6.5], ["7:00", 7.0], ["7:30", 7.5], ["8:00", 8.0], ["8:30", 8.5], ["9:00", 9.0], ["9:30", 9.5], ["10:00", 10.0], ["10:30", 10.5], ["11:00", 11], ["11:30", 11.5], ["12:00", 12.0], ["13:00", 13.0], ["14:00", 14.0], ["15:00", 15.0], ["16:00", 16.0], ["17:00", 17.0], ["18:00", 18.0], ["19:00", 19.0], ["20:00", 20.0], ["21:00", 21.0], ["22:00", 22.0], ["23:00", 23.0], ["24:00", 24.0]]
     @passengers = [["Number of passengers", nil], [1,1], [2,2], [3,3], [4,4], [5,5], [6,6]]
   end
 end

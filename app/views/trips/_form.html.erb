@@ -11,7 +11,7 @@
       <div class="form-group"><%= select_tag :rate_id, options_for_select(@rates, @trip.rate_id), {class: "form-control required input-sm", onblur:"checkFormElementStatus()"} %>
       </div>
 
-      <div class="form-group"><%=select_tag :hours, options_for_select(@hours, @trip.hours), {class: "form-control required input-sm", onblur:"checkFormElementStatus()"} %></div> 
+      <div class="form-group"><%=select_tag :hours, options_for_select(@hours, @trip.hours.to_f), {class: "form-control required input-sm", onblur:"checkFormElementStatus()"} %></div> 
       <div class="form-group">
         <%= select_tag :car_id, options_for_select(@cars, @trip.car_id), {class: "form-control required input-sm", onblur:"checkFormElementStatus()"} %>
       </div>
