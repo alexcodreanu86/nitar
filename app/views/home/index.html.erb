@@ -1,6 +1,6 @@
 <div class="col-lg-8">
   <div class="well sidebar-nav" align="center">
-    <p>Content goes here</p>
+    <p id="fleet-banner">Our Fleet</p>
 
     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
@@ -45,14 +45,14 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
       </a>
     </div>
-    <p>Content that doesn't move. Make images the same size.</p>
+    <%= link_to "Book A Ride Now", current_user ? new_user_trip_path(current_user.id) : new_non_user_trip_path, class: "btn btn-default btn-lg book-now-button" %>
   </div>
 </div>
 
 <div class="col-lg-3 col-lg-offset-1">
   <div class="well sidebar-nav" id="rate-finder" align="center">
     <h3>Find Rate Here</h3>
-    <%= form_tag(new_trip_from_generator_path, method: "GET", role: 'form', id: "instant-quote") do  %>
+    <%= form_tag(current_user ? new_user_trip_path(current_user.id) : new_non_user_trip_path, method: "GET", role: 'form', id: "instant-quote") do  %>
       <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types), {class: "form-control input-sm", onchange: "typeSelection(this)"}%>
       </div>
 
@@ -67,7 +67,7 @@
         <%= select_tag :car_id, options_for_select(@cars), {class: "form-control input-sm",onchange: "setSelection('carType', this)" } %>
       </div>
 
-      <div class="form-group"><%= submit_tag "Book now" , id: "generator-button", class: "btn btn-default btn-lg hidden" %></div>
+      <div class="form-group"><%= submit_tag "Book now", id: "generator-button", class: "btn btn-default btn-lg hidden book-now-button" %></div>
     <% end %>
 
     <div class="price-response"></div>
