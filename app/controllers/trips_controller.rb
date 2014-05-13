@@ -92,7 +92,7 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:contact_name, :contact_phone, :contact_email, :number_of_passengers, :pick_up, :drop_off, :pickup_time, :description).merge( current_user ? {user_id: current_user.id} : {}).merge(params_from_generator)
+    params.require(:trip).permit(:contact_name, :contact_phone, :contact_email, :number_of_passengers, :pick_up, :drop_off, :pickup_time, :description).merge( current_user ? {user_id: current_user.id} : {}).merge(params_from_generator).merge(number_of_passengers: params[:number_of_passengers])
   end
 
   def set_form_variables
