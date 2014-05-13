@@ -8,6 +8,8 @@ SpartanLimo::Application.routes.draw do
     resources :trips, only: [:index, :new, :create, :show]
     resources :trips, only: [:edit, :update, :destroy], shallow: true
   end
+
+  get "admins/menu", to: "admins#menu", as: "admin_menu"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
