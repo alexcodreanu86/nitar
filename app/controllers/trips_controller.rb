@@ -1,9 +1,13 @@
 class TripsController < ApplicationController
-  before_filter :current_admin?, only: [:index, :destroy, :edit, :update]
-  before_filter :authorized_user?, only: [:show, :new, :create]
+  before_filter :authorize_admin, only: [:destroy, :edit, :update]
+  before_filter :authorize_user, only: [:index, :show, :new, :create]
+  before_filter :authorize_non_user, only: [:non_user_show]
 
   def show
     @trip = Trip.where(id: params[:id]).first
+    unless @trip 
+      unauthorized_user
+    end
   end
 
   def index
@@ -64,7 +68,7 @@ class TripsController < ApplicationController
 
     if @trip.save
       flash[:notice] = "Thank you for booking a ride with us. One of our representatives will call you regarding the payment."
-      redirect_to @trip
+      redirect_to new_user_trip_path(@trip.user_id, @trip.id)
     else
       flash[:alert] = "Please make sure that you fill out all the required fields!" 
       set_form_variables
@@ -83,8 +87,17 @@ class TripsController < ApplicationController
 
   protected
 
-  def authorized_user?
-    current_admin? || (current_user && current_user.id == params[:user_id])
+  def authorize_user
+    unless current_admin? || (current_user && current_user.id == params[:user_id].to_i)
+      unauthorized_user
+    end
+  end
+
+  def authorize_non_user
+    @trip = Trip.where(id: params[:id]).first
+    unless current_admin? || @trip.booker_ip == request.remote_ip
+      unauthorized_user
+    end
   end
 
   def params_from_generator
@@ -92,7 +105,7 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:contact_name, :contact_phone, :contact_email, :number_of_passengers, :pick_up, :drop_off, :pickup_time, :description).merge( current_user ? {user_id: current_user.id} : {}).merge(params_from_generator).merge(number_of_passengers: params[:number_of_passengers])
+    params.require(:trip).permit(:contact_name, :contact_phone, :contact_email, :number_of_passengers, :pick_up, :drop_off, :pickup_time, :description).merge( current_user ? {user_id: current_user.id} : {}).merge(params_from_generator).merge({number_of_passengers: params[:number_of_passengers], booker_ip: request.remote_ip})
   end
 
   def set_form_variables
