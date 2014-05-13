@@ -11,6 +11,7 @@ class TripsController < ApplicationController
   end
 
   def index
+    @trips = current_user.trips.order(:pickup_time => :desc)
   end
 
   def new
@@ -68,7 +69,7 @@ class TripsController < ApplicationController
 
     if @trip.save
       flash[:notice] = "Thank you for booking a ride with us. One of our representatives will call you regarding the payment."
-      redirect_to new_user_trip_path(@trip.user_id, @trip.id)
+      redirect_to user_trip_path(@trip.user_id, @trip.id)
     else
       flash[:alert] = "Please make sure that you fill out all the required fields!" 
       set_form_variables
