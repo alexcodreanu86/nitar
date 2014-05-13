@@ -6,6 +6,7 @@ class CreateTrips < ActiveRecord::Migration
       t.belongs_to :rate
       t.string :contact_name
       t.string :contact_phone
+      t.string :contact_email
       t.integer :number_of_passengers
       t.string :pick_up
       t.string :drop_off

@@ -1,6 +1,6 @@
 function checkTripType(value){
   if(+value <= 4){
-    airportTrip();
+    airportTrip(+value);
   } else if(+value == 5){
     pointToPoint()
   } else if(+value == 6){
@@ -8,7 +8,6 @@ function checkTripType(value){
   }
   checkFormElementStatus();
 }
-
 
 function checkFormElementStatus(){
   var elements = document.getElementsByClassName('required');
@@ -22,11 +21,15 @@ function checkFormElementStatus(){
   }
 }
 
-function airportTrip(){
+function airportTrip(value){
   $("#hours").hide();
   $('#airport').show();
-  $('#airport-tax').show()
   $('#rate_id').show();
+  if(value == 4){
+    $('#airport-tax').hide();
+  } else {
+    $('#airport-tax').show();
+  }
 }
 
 function hourlyTrip(){
