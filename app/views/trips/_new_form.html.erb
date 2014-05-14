@@ -20,27 +20,27 @@
         <%= select_tag :number_of_passengers, options_for_select(@passengers, @trip.number_of_passengers), {class: "form-control required input-sm", onblur:"checkFormElementStatus()"} %>
       </div>
 
-      <div><%= f.label :pickup_time %></div>
-      <div class="form-group"><%= f.datetime_local_field :pickup_time, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
-      <div><%= f.label :pick_up, "Pick up information" %></div>
-      <div class="form-group"><%= f.text_field :pick_up, class: "form-control required input-sm", placeholder: "e.g. 1 S. Dearbord Chicago IL 60001 or American Airlines 170 ", onblur:"checkFormElementStatus()" %></div>
+      <div class="form-group"><div><%= f.label :pickup_time %></div>
+      <%= f.datetime_local_field :pickup_time, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
+      <div class="form-group"><div><%= f.label :pick_up, "Pick up address" %></div>
+      <%= f.text_field :pick_up, class: "form-control required input-sm", placeholder: "e.g. 1 S. Dearbord Chicago IL 60001", onblur:"checkFormElementStatus()" %></div>
 
-      <div><%= f.label :drop_off, "Drop off information" %></div>
-      <div class="form-group"><%= f.text_field :drop_off, class: "form-control required input-sm", placeholder: "e.g. 1 S. Dearbord Chicago IL 60001 or American Airlines 170 ", onblur:"checkFormElementStatus()" %></div>
+      <div class="form-group"><div><%= f.label :drop_off, "Drop off Address" %></div>
+      <%= f.text_field :drop_off, class: "form-control required input-sm", placeholder: "e.g. 1 S. Dearbord Chicago IL 60001", onblur:"checkFormElementStatus()" %></div>
     </div>
 
     <div class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-6 col-sm-offset-1">
-      <div><%= f.label :contact_name, "Contact Name" %></div>
-      <div class="form-group"><%= f.text_field :contact_name, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
+      <div class="form-group"><div><%= f.label :contact_name, "Contact Name" %></div>
+      <%= f.text_field :contact_name, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
 
-      <div><%= f.label :contact_email, "Email" %></div>
-      <div class="form-group"><%= f.email_field :contact_email, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
+      <div class="form-group"><div><%= f.label :contact_email, "Email" %></div>
+      <%= f.email_field :contact_email, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
 
-      <div><%= f.label :contact_phone, "Phone" %></div>
-      <div class="form-group"><%= f.telephone_field :contact_phone, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
+      <div class="form-group"><div><%= f.label :contact_phone, "Phone" %></div>
+      <%= f.telephone_field :contact_phone, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
 
-      <div><%= f.label :description, 'Anything else that we should know' %></div>
-      <div class="form-group"><%= f.text_area :description, cols: 40, rows: 4, class: "form-control input-sm", onblur:"checkFormElementStatus()"%></div> 
+      <div class="form-group"><div><%= f.label :description, 'Anything else that we should know' %></div>
+      <%= f.text_area :description, cols: 40, rows: 4, class: "form-control input-sm", onblur:"checkFormElementStatus()"%></div> 
     </div>
 
     <div class="row"> 

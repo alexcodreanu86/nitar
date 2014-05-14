@@ -14,6 +14,7 @@ class CreateTrips < ActiveRecord::Migration
       t.string :drop_off
       t.datetime :pickup_time
       t.string :description
+      t.string :driver_information
       t.integer :trip_type
       t.integer :airport
       t.float :hours
