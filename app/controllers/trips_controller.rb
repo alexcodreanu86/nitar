@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_filter :authorize_admin, only: [:destroy, :edit, :update]
+  before_filter :authorize_admin, only: [:destroy, :edit, :update, :toggle_payment]
   before_filter :authorize_user, only: [:index, :show, :new, :create]
   before_filter :authorize_non_user, only: [:non_user_show]
 
@@ -55,7 +55,7 @@ class TripsController < ApplicationController
   end
 
   def create
-    @trip = Trip.new(trip_params)
+    @trip = Trip.new(trip_params.merge(user_id: current_user.id))
     @car = Car.where(id: @trip.car_id).first
     if @car
       if @trip.trip_type == 6
@@ -78,12 +78,34 @@ class TripsController < ApplicationController
   end
 
   def edit
+    set_form_variables
+    @trip = Trip.where(id: params[:id]).first
   end
 
   def update
+    @trip = Trip.where(id: params[:id]).first
+    @trip.update(update_trip_params)
+    if @trip.save
+      flash[:notice] = "Trip Successfully updated."
+      redirect_to user_trip_path(@trip.user_id, @trip.id)
+    else
+      flash[:alert] = "Please make sure that you fill out all the required fields!" 
+      set_form_variables
+      render "edit"
+    end
   end
 
   def destroy
+    @trip = Trip.where(id: params[:id]).first
+    @trip.destroy
+    redirect_to admin_menu_path
+  end
+
+  def toggle_payment
+    @trip = Trip.where(id: params[:id]).first
+    @trip.payment_information = !@trip.payment_information
+    @trip.save
+    redirect_to :back
   end
 
   protected
@@ -106,7 +128,11 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:contact_name, :contact_phone, :contact_email, :number_of_passengers, :pick_up, :drop_off, :pickup_time, :description).merge( current_user ? {user_id: current_user.id} : {}).merge(params_from_generator).merge({number_of_passengers: params[:number_of_passengers], booker_ip: request.remote_ip})
+    params.require(:trip).permit(:contact_name, :contact_phone, :contact_email, :number_of_passengers, :pick_up, :drop_off, :pickup_time, :description).merge(params_from_generator).merge({number_of_passengers: params[:number_of_passengers], booker_ip: request.remote_ip})
+  end
+
+  def update_trip_params
+    params.require(:trip).permit(:contact_name, :contact_phone, :contact_email, :number_of_passengers, :pick_up, :drop_off, :pickup_time, :description).merge(params_from_generator).merge({number_of_passengers: params[:number_of_passengers]})
   end
 
   def set_form_variables

@@ -1,5 +1,5 @@
 <div class="row">
-  <%= form_for [current_user, @trip], role: 'form' do |f| %>
+  <%= form_for @trip, role: 'form' do |f| %>
     <div class="col-lg-5 col-md-5 col-sm-5">
       <p id="airport-tax" class="text-info">Please note that airport pickups will have a 4$ airport tax added to the total.</p>
       <div><%= f.label :trip_type, "Trip Information:" %></div>
@@ -43,8 +43,8 @@
       <div class="form-group"><%= f.text_area :description, cols: 40, rows: 4, class: "form-control input-sm", onblur:"checkFormElementStatus()"%></div> 
     </div>
 
-      <div class="row"> 
-        <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3"><%= submit_tag "Submit Reservation", class: "btn btn-default btn-lg", id: "trip-button" %></div>
-      </div>
+    <div class="row"> 
+      <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3"><%= submit_tag "Update Reservation", class: "btn btn-default btn-lg", id: "trip-button" %></div>
+    </div>
   <% end %>
 </div>
