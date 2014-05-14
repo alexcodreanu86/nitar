@@ -14,7 +14,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><%= link_to "About us", "#", class: 'nav-link' %></li>
-        <li><%= link_to "Contact", "#", class: 'nav-link' %></li>
+        <li><%= link_to "Contact", "#", class: 'nav-link', data: {toggle: "modal", target:"#contact-modal"} %></li>
         <li><%= link_to "Book a Ride", current_user ? new_user_trip_path(current_user.id) : new_non_user_trip_path ,class: 'nav-link' %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
