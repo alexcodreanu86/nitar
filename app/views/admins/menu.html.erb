@@ -23,7 +23,7 @@
             </thead>
             <tbody>
               <% @future_trips.each do |trip| %>
-                <tr class="<%= trip.payment_information ? nil : 'danger'%>">
+                <tr class="<%= trip.payment_information && (trip.driver_information && !trip.driver_information.empty?)  ? nil : 'danger'%>">
                   <td><%= trip.id %></td>
                   <td><a href="<%= user_trip_path(trip.user_id, trip.id) %>"><%= trip.pickup_time.strftime("%a %b/%e/%Y - %T") %></a></td>
                   <td><%= trip.pick_up %></td>

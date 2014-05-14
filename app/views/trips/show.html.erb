@@ -17,7 +17,7 @@
 
         <% if @trip.airport %>
           <tr>
-            <td>Airport:</td> <td><%= @trip.airport == 1 ? "Chicago O'hare (ORD)" : "Chicago Midway (MDW)" %></td>
+            <td>Airport:</td><td><%= @trip.airport == 1 ? "Chicago O'hare (ORD)" : "Chicago Midway (MDW)" %></td>
           </tr>
         <% elsif @trip.hours%>
           <tr>
@@ -43,6 +43,11 @@
         <tr>
           <td>Trip price: (no gratuity included)</td><td><%= @trip.price %>$</td>
         </tr>
+        <% if current_admin? %>
+          <tr class="<%= @trip.driver_information && !@trip.driver_information.empty? ? "" : "danger" %>">
+            <td>Driver information: </td><td><%= @trip.driver_information %></td>
+          </tr>
+        <% end %>
       </table>
     </div>
     <% if @trip.description != "" %>
@@ -56,7 +61,7 @@
       <% if @trip.payment_information %>
         <p class="text-success">This trip has payment information on file.</p>
       <% else %>
-        <p class="text-danger">This trip does not have payment information on file yet.</p>
+        <p class="bg-danger">This trip does not have payment information on file yet.</p>
       <% end %>
     <% end %>
   </div>
