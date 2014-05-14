@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authorise_admin, only: [:index]
+  before_filter :authorize_admin, only: [:index]
   before_filter :authorize_user, only: [:show]
 
   def show
@@ -9,6 +9,13 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.order(:name)
+  end
+
+  def destroy
+    @user = User.where(id: params[:id]).first
+    @user.destroy
+    flash[:notice] = "#{@user.name}'s account has been deleted!"
+    redirect_to :back
   end
 
   protected
