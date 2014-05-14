@@ -7,6 +7,7 @@ class CreateTrips < ActiveRecord::Migration
       t.string :contact_name
       t.string :contact_phone
       t.string :contact_email
+      t.boolean :payment_information, default: false
       t.string :booker_ip
       t.integer :number_of_passengers
       t.string :pick_up
