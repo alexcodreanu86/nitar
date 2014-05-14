@@ -1,80 +1,110 @@
-<div class="col-lg-8">
-  <div class="well sidebar-nav shaddowed" align="center">
-    <p id="fleet-banner">Our Fleet</p>
+<div class="row index-content">
+  <div class="col-lg-8">
+    <div class="well sidebar-nav shaddowed" align="center">
+      <p id="fleet-banner">Our Fleet</p>
 
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-      </ol>
+      <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-        <div class="item active">
-          <%= image_tag("bmw.jpeg") %>
-          <div class="carousel-caption">
-            <p>Text for bmw</p>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+          <div class="item active">
+            <%= image_tag("bmw.jpeg") %>
+            <div class="carousel-caption">
+              <p>Text for bmw</p>
+            </div>
+            <p>text outside bmw</p>
           </div>
-          <p>text outside bmw</p>
+
+          <div class="item">
+            <%= image_tag("lincoln.jpeg") %>
+            <div class="carousel-caption">
+              <p>text for lincoln</p>
+            </div>
+            <p>Text outside lincoln</p>
+          </div>
+
+          <div class="item">
+            <%= image_tag("suburban.jpeg") %>
+            <div class="carousel-caption">
+              <p>text for suburban</p>
+            </div>
+            <p>Text outside suburban</p>
+          </div>
         </div>
 
-        <div class="item">
-          <%= image_tag("lincoln.jpeg") %>
-          <div class="carousel-caption">
-            <p>text for lincoln</p>
-          </div>
-          <p>Text outside lincoln</p>
-        </div>
-
-        <div class="item">
-          <%= image_tag("suburban.jpeg") %>
-          <div class="carousel-caption">
-            <p>text for suburban</p>
-          </div>
-          <p>Text outside suburban</p>
-        </div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
       </div>
-
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
+      <%= link_to "Book A Ride Now", current_user ? new_user_trip_path(current_user.id) : new_non_user_trip_path, class: "btn btn-default btn-lg book-now-button" %>
     </div>
-    <%= link_to "Book A Ride Now", current_user ? new_user_trip_path(current_user.id) : new_non_user_trip_path, class: "btn btn-default btn-lg book-now-button" %>
+  </div>
+
+  <div class="col-lg-3 col-lg-offset-1">
+    <div class="well sidebar-nav shaddowed" id="rate-finder" align="center">
+      <h3>Find Rate Here</h3>
+      <%= form_tag(current_user ? new_user_trip_path(current_user.id) : new_non_user_trip_path, method: "GET", role: 'form', id: "instant-quote") do  %>
+        <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types), {class: "form-control input-sm", onchange: "typeSelection(this)"}%>
+        </div>
+
+        <div class="form-group"><%= select_tag :airport, options_for_select(@airports), {class: "form-control input-sm", onchange: "setSelection('airport', this)"} %>
+        </div>
+
+        <div class="form-group"><%= select_tag :rate_id, options_for_select(@rates), {class: "form-control input-sm", onchange: "setSelection('rateId', this)"} %>
+        </div>
+
+        <div class="form-group"><%=select_tag :hours, options_for_select(@hours), {class: "form-control input-sm", onchange: "setSelection('hours', this)"} %></div> 
+        <div class="form-group">
+          <%= select_tag :car_id, options_for_select(@cars), {class: "form-control input-sm",onchange: "setSelection('carType', this)" } %>
+        </div>
+
+        <div class="form-group"><%= submit_tag "Book now", id: "generator-button", class: "btn btn-default btn-lg hidden book-now-button" %></div>
+      <% end %>
+
+      <div class="price-response"></div>
+    </div>
   </div>
 </div>
-
-<div class="col-lg-3 col-lg-offset-1">
-  <div class="well sidebar-nav shaddowed" id="rate-finder" align="center">
-    <h3>Find Rate Here</h3>
-    <%= form_tag(current_user ? new_user_trip_path(current_user.id) : new_non_user_trip_path, method: "GET", role: 'form', id: "instant-quote") do  %>
-      <div class="form-group"><%= select_tag :trip_type, options_for_select(@trip_types), {class: "form-control input-sm", onchange: "typeSelection(this)"}%>
-      </div>
-
-      <div class="form-group"><%= select_tag :airport, options_for_select(@airports), {class: "form-control input-sm", onchange: "setSelection('airport', this)"} %>
-      </div>
-
-      <div class="form-group"><%= select_tag :rate_id, options_for_select(@rates), {class: "form-control input-sm", onchange: "setSelection('rateId', this)"} %>
-      </div>
-
-      <div class="form-group"><%=select_tag :hours, options_for_select(@hours), {class: "form-control input-sm", onchange: "setSelection('hours', this)"} %></div> 
-      <div class="form-group">
-        <%= select_tag :car_id, options_for_select(@cars), {class: "form-control input-sm",onchange: "setSelection('carType', this)" } %>
-      </div>
-
-      <div class="form-group"><%= submit_tag "Book now", id: "generator-button", class: "btn btn-default btn-lg hidden book-now-button" %></div>
-    <% end %>
-
-    <div class="price-response"></div>
-  </div>
+<div class="row">
+    <div class="well shaddowed">
+      <h2 id="about-us">About Us:</h2>
+      <p>
+        Spartan Limousine is a New Company with New ideas.
+        Our competitive rates, high-quality cars and professional drivers  will make the trip a wonderful experience for you and your guests. You’ll always find complimentary beverages, current newspapers and magazines waiting inside. 
+        Our skilled and highly qualified drivers make it a point to ensure that their personal appearance matches the class and style of the vehicle that will transport you to your destination. 
+        Whether it is a trip to or from a Chicago airport, a corporate event, a trip to one of the many casinos, or it is one of the special days of your life such as a wedding, prom, graduation, or birthday, Spartan Limousine is here to serve all your transportation need. Your satisfaction is important to us.
+      </p>
+    </div>
 </div>
 
 <script type="text/javascript">
 var checker = new FormChecker();
   $("#hours").hide();
+
+  $(function(){
+    $('#about-us-link').on('click', function(e){
+      e.preventDefault();
+      $('body').animate({
+        scrollTop: $('#about-us').offset().top
+      }, 600);
+    });
+  });
+
+  $(document).ready(function() {
+    if (window.location.hash != null && window.location.hash != '') 
+      $('body').animate({
+          scrollTop: $(window.location.hash).offset().top
+      }, 600);
+  });
+
 </script>

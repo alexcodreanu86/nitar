@@ -14,15 +14,17 @@
     <div class="row">
       <% if flash[:notice] %>
         <div class="col-lg-8 col-lg-offset-2">
-          <div class="well sidebar-nav">
-            <p class="text-success"><%= notice %></p>
+          <div class="alert alert-success fade in">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <p class><%= notice %></p>
             <% flash[:noice] = nil %>
           </div>
         </div>
       <% elsif flash[:alert] %>
         <div class="col-lg-8 col-lg-offset-2">
-          <div class="well sidebar-nav">
-            <p class="text-danger"><%= alert %></p>
+          <div class="alert alert-danger fade in">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <p><%= alert %></p>
             <% flash[:alert] = nil %>
           </div>
         </div>
