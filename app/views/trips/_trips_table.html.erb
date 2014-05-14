@@ -11,13 +11,13 @@
     </thead>
     <tbody>
       <% @trips.each do |trip| %>
-          <tr>
-            <td><%= trip.id %></td>
-            <td><a href="<%= user_trip_path(trip.user_id, trip.id) %>"><%= trip.pickup_time.strftime("%a %b/%e/%Y - %T") %></a></td>
-            <td><%= trip.pick_up %></td>
-            <td><%= trip.drop_off %></td>
-            <td><%= trip.contact_name %></td>
-          </tr>
+        <tr>
+          <td><%= trip.id %></td>
+          <td><a href="<%= user_trip_path(trip.user_id, trip.id) %>"><%= trip.pickup_time.strftime("%a %b/%e/%Y - %T") %></a></td>
+          <td><%= trip.pick_up %></td>
+          <td><%= trip.drop_off %></td>
+          <td><%= trip.contact_name %></td>
+        </tr>
       <% end %>
     </tbody>
   </table>

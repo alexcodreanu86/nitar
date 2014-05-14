@@ -1,0 +1,19 @@
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="well shaddowed">
+    <h1>PLease do not leave any required fields empty.</h1>
+      <%= render "trips/edit_form" %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  <% if !@trip.trip_type %>
+    $("#airport-tax").hide();
+  <% elsif @trip.trip_type.to_i == 5 %>
+    pointToPoint();
+  <% elsif @trip.trip_type.to_i == 6  %>
+    hourlyTrip();
+  <% else %>
+    airportTrip(<%= @trip.trip_type %>);  
+  <% end %>
+  checkFormElementStatus();
+</script>
