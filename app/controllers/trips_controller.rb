@@ -11,7 +11,8 @@ class TripsController < ApplicationController
   end
 
   def index
-    @trips = current_user.trips.order(:pickup_time => :desc)
+    @user = User.where(id: params[:user_id]).first
+    @trips = @user.trips.order(:pickup_time => :desc)
   end
 
   def new
@@ -36,13 +37,11 @@ class TripsController < ApplicationController
     @car = Car.where(id: @trip.car_id).first
     if @car
       if @trip.trip_type == 6
-        @trip.price = @car.hourly_rate * @trip.hours.to_f
+        @trip.base_price = @car.hourly_rate * @trip.hours.to_f
       else
-        @trip.price = Rate.calculate(trip_params, @car.price_ratio)
+        @trip.base_price = Rate.calculate_base(trip_params, @car.price_ratio)
       end
     end
-
-    @trip.price += 4 if @trip.trip_type && @trip.trip_type <= 3
 
     if @trip.save
       flash[:notice] = "Thank you for booking a ride with us. One of our representatives will call you regarding the payment."
@@ -59,13 +58,11 @@ class TripsController < ApplicationController
     @car = Car.where(id: @trip.car_id).first
     if @car
       if @trip.trip_type == 6
-        @trip.price = @car.hourly_rate * @trip.hours.to_f
+        @trip.base_price = @car.hourly_rate * @trip.hours.to_f
       else
-        @trip.price = Rate.calculate(trip_params, @car.price_ratio)
+        @trip.base_price = Rate.calculate_base(trip_params, @car.price_ratio)
       end
     end
-
-    @trip.price += 4 if @trip.trip_type && @trip.trip_type <= 3
 
     if @trip.save
       flash[:notice] = "Thank you for booking a ride with us. One of our representatives will call you regarding the payment."
