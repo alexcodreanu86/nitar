@@ -18,7 +18,8 @@ class CreateTrips < ActiveRecord::Migration
       t.integer :trip_type
       t.integer :airport
       t.float :hours
-      t.integer :price
+      t.integer :base_price
+      t.float :total_price
 
       t.timestamps
     end

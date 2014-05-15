@@ -8,10 +8,16 @@ SpartanLimo::Application.routes.draw do
   
   resources :users, only: [:index, :show, :destroy] do 
     resources :trips, only: [:index, :new, :create, :show]
-    resources :trips, only: [:edit, :update, :destroy], shallow: true
+    resources :trips, only: [:edit, :update, :destroy], shallow: true do
+      resources :extra_charges
+    end
   end
 
   get "admins/menu", to: "admins#menu", as: "admin_menu"
+  get "admins/index", to: "admins#index", as: "all_admins"
+  get "admins/new", to: "admins#new", as: "new_admin"
+  post "admins/create", to: "admins#create", as: "create_admin"
+    
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
