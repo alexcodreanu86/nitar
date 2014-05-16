@@ -28,6 +28,8 @@ SpartanLimo::Application.routes.draw do
   
   resources :rates
   resources :cars
+  get "messages/:id/toggle_answered", to: "messages#toggle_answered", as: "toggle_answered"
+  resources :messages, only: [:create, :destroy, :show, :index]
 
 
 
