@@ -1,7 +1,9 @@
 class AdminsController < ApplicationController
+  before_filter :authorize_admin
   def menu
     @past_trips = Trip.where("pickup_time < ?", Time.now).order(:pickup_time => :desc)
     @future_trips = Trip.where("pickup_time > ?", Time.now).order(:pickup_time)
+    @new_messages = Message.where(was_answered: false).count
   end
 
   def index
