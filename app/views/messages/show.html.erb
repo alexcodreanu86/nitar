@@ -1,0 +1,23 @@
+<div class="col-lg-8 col-lg-offset-2 col-md-10">
+  <div class="well shaddowed">
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1">
+        <p><strong>From:</strong> <%= @message.sender_email %></p>
+        <p><strong>Subject:</strong> <%= @message.subject %></p>
+        <hr />
+        <p>Content:</p>
+        <p><%= @message.content %></p>
+        <hr />
+        <% if @message.was_answered %>
+          <p class="text-success">This message was marked as answered.</p>
+        <% else %>
+          <p class="bg-danger">This message was not answered yet.</p>
+        <% end %>
+        <%= link_to "Toggle Answered Status", toggle_answered_path(@message), class: "btn btn-primary btn-sm" %>
+        <%= link_to "Delete Message", message_path(@message), data: {confirm: "Are you sure you want to delete this message?"}, method: "DELETE", class: "btn btn-danger btn-sm" %>
+        
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -6,10 +6,6 @@ body {
   font-family: "Times New Roman", Times, serif;
 }
 
-.modal-content{
-
-}
-
 .navbar {
   line-height: 5.1em;
   margin-bottom: 2em;
@@ -38,11 +34,9 @@ body {
   padding: 0.5em 2em 0.5em 0.5em ;
 }
 
-
-
 .navbar li a {
   line-height: 2.5em;
-  &:hover{
+  &:hover {
     /* IE10 Consumer Preview */ 
     background-image: -ms-linear-gradient(top, #777 0%, #222 100%);
 
@@ -64,8 +58,7 @@ body {
   }
 }
 
-
-.navbar-nav li a.nav-link{
+.navbar-nav li a.nav-link {
   font-size: 1.5em;
   font-family: "Times New Roman", Times, serif;
   font-weight: 900;
@@ -77,8 +70,6 @@ body {
 
 }
 
-.nav-link {
-}
 
 li.right {
   float:right;
@@ -120,4 +111,11 @@ li.right {
 
 .index-content{
   height: 90vh;
+}
+
+.contact-information {
+  border: none;
+  box-sizing: border-box;
+  width: 80%;
+  border-collapse: collapse;
 }
