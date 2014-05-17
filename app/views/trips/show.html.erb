@@ -74,6 +74,7 @@
       <%= link_to "Toggle Payment Info", toggle_trip_payment_path(@trip), class: 'btn btn-primary btn-md' %>
       <%= link_to "Add Extra Charge", new_trip_extra_charge_path(@trip), class: "btn btn-primary btn-md" %>
       <%= link_to "Delete Trip", trip_path(@trip), class: 'btn btn-danger btn-md', data: {confirm: "Are you sure you want to delete this trip?"}, method: "DELETE" %>
+      <%= link_to "Customer Confirmation", customer_confirmation_path(@trip), class: 'btn btn-primary btn-md pull-right' %>
       <% if @trip.payment_information %>
         <p class="text-success">This trip has payment information on file.</p>
       <% else %>
