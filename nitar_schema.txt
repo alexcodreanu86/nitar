@@ -87,7 +87,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="621" y="181" name="trips">
+<table x="628" y="90" name="trips">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -126,6 +126,15 @@
 <default>NULL</default></row>
 <row name="description" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="driver_information" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="payment_information" null="1" autoincrement="0">
+<datatype>bit</datatype>
+<default>NULL</default></row>
+<row name="is_confirmed" null="1" autoincrement="0">
+<datatype>bit</datatype>
 <default>NULL</default></row>
 <row name="number_of_passengers" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
