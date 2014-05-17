@@ -1,9 +1,4 @@
-<html>
-<head>
-  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-</head>
-<body>
-<h3>New quote requested by <%= @trip.contact_name %>.</h3>   
+<h1>Trip for: <%= @trip.contact_name %></h1>
 <div class="table-responsive">
   <table class="table">
     <tr>
@@ -20,13 +15,13 @@
 
     <% if @trip.airport %>
       <tr>
-        <td>Airport:</td><td><%= @trip.airport == 1 ? "Chicago O'hare (ORD)" : "Chicago Midway (MDW)" %></td>
-      </tr>
-    <% elsif @trip.hours%>
+      <td>Airport:</td><td><%= @trip.airport == 1 ? "Chicago O'hare (ORD)" : "Chicago Midway (MDW)" %></td>
+    </tr>
+  <% elsif @trip.hours%>
       <tr>
-        <td>Hours booked</td> <td><%= @trip.hours %></td>
-      </tr>
-    <% end %>
+      <td>Hours booked</td> <td><%= @trip.hours %></td>
+    </tr>
+  <% end %>
 
     <tr>
       <td>Number of passengers:</td> <td><%= @trip.number_of_passengers %></td>
@@ -48,19 +43,15 @@
     </tr>
     <% @trip.extra_charges.each do |charge| %>
       <tr>
-        <td><%= charge.description %>:</td>
-        <td><%= number_to_currency(charge.price) %></td>
-      </tr>
-    <% end %>
+      <td><%= charge.description %>:</td>
+      <td><%= number_to_currency(charge.price) %></td>
+    </tr>
+  <% end %>
     <tr>
       <td><strong>Total price:</strong></td><td><strong><%= number_to_currency(@trip.total_price) %></strong></td>
     </tr>
   </table>
-    <% if @trip.description != "" %>
-      <p>This extra information has been added to the trip: <br><%= @trip.description %></p>
-    <% end %>
-    <hr />
-    <p>You can view the trip at http://spartanlimousine.com<%= non_user_show_path(@trip) %></p>
 </div>
-</body>
-</html>
+<% if @trip.description != "" %>
+  <p>This extra information has been added to the trip: <br><%= @trip.description %></p>
+<% end %>

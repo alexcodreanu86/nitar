@@ -7,4 +7,18 @@ class SpartanMailer < ActionMailer::Base
     end
   end
 
+  def new_message(message)
+    @message = message
+    mail(to: ENV["ADMIN_EMAIL"], subject: "New Message From Customer") do |format|
+      format.html
+    end
+  end
+
+  def send_customer_confirmation(message, trip)
+    @message = message
+    @trip = trip
+    mail(to: @trip.contact_email, subject: "Trip confirmation") do |format|
+      format.html
+    end
+  end
 end

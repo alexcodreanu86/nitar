@@ -1,0 +1,11 @@
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="well shaddowed">
+    <h4>Below is your trip confirmation. Thank you very much for your business.</h4>
+    <% if !(@message && @message.empty?) %>
+      <p><%= @message %></p>
+    <% end %>
+    <hr />
+    <%= render "trips/trip_view" %>
+  <p>You can view the trip at http://spartanlimousine.com<%= non_user_show_path(@trip) %></p>
+</div>
+</div>

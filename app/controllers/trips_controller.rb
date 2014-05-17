@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_filter :authorize_admin, only: [:destroy, :edit, :update, :toggle_payment]
+  before_filter :authorize_admin, only: [:destroy, :edit, :update, :toggle_payment, :confirm_with_customer, :send_confirmation]
   before_filter :authorize_user, only: [:index, :show, :new, :create]
   before_filter :authorize_non_user, only: [:non_user_show]
 
@@ -88,7 +88,7 @@ class TripsController < ApplicationController
     @trip.update(update_trip_params)
     if @trip.save
       flash[:notice] = "Trip Successfully updated."
-      redirect_to user_trip_path(@trip.user_id, @trip.id)
+      redirect_to non_user_show_path @trip
     else
       flash[:alert] = "Please make sure that you fill out all the required fields!" 
       set_form_variables
@@ -107,6 +107,18 @@ class TripsController < ApplicationController
     @trip.payment_information = !@trip.payment_information
     @trip.save
     redirect_to :back
+  end
+  
+  def confirm_with_customer
+    @trip = Trip.where(id: params[:id]).first
+  end
+
+  def send_confirmation
+    @trip = Trip.where(id: params[:id]).first
+    @message = params[:admin_message]
+    flash[:notice] = "Sent confirmation to #{@trip.contact_email}!"
+    redirect_to non_user_show_path @trip
+    SpartanMailer.send_customer_confirmation(@message, @trip).deliver
   end
 
   protected

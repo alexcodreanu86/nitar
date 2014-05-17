@@ -43,6 +43,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'braintree'
 end
 
 group :test do

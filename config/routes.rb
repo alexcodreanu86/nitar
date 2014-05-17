@@ -5,7 +5,8 @@ SpartanLimo::Application.routes.draw do
   post "trips/create_non_user_trip",to: "trips#non_user_create", as: "trips"
   get "trips/non_user_show/:id", to: "trips#non_user_show", as: "non_user_show"
   get "trips/toggle_payment/:id", to: "trips#toggle_payment", as: "toggle_trip_payment"
-  
+  get "trips/confirm_with_customer/:id", to: "trips#confirm_with_customer", as: "customer_confirmation"
+  post "trips/send_confirmation/:id", to: "trips#send_confirmation", as: "send_customer_confirmation"
   resources :users, only: [:index, :show, :destroy] do 
     resources :trips, only: [:index, :new, :create, :show]
     resources :trips, only: [:edit, :update, :destroy], shallow: true do
