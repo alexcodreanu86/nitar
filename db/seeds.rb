@@ -1,4 +1,4 @@
- require 'csv'
+require 'csv'
 @file = File.expand_path('../limo_rates.csv',__FILE__)
 @csv_rates = File.open(@file)
 
