@@ -1,0 +1,13 @@
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="well shaddowed">
+    <h4>Below is your trip confirmation. Thank you very much for your business.</h4>
+    <%= form_tag(controller: "trips", action: "send_confirmation", method: "POST") do %>
+      <div class="form-group">
+        <div><%= label_tag(:admin_message, "Optional Message") %></div>
+        <div><%= text_area_tag :admin_message,"", class: "form-control input-sm", rows: 3 %></div>
+      </div>
+      <%= submit_tag("Send Confirmation", class: "btn btn-md btn-primary") %>
+    <% end %>
+    <%= render "trips/trip_view" %>
+  </div>
+</div>
