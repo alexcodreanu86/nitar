@@ -80,6 +80,12 @@
       <% else %>
         <p class="bg-danger">This trip does not have payment information on file yet.</p>
       <% end %>
+
+      <% if @trip.is_confirmed %>
+        <p class="text-success">Customer confirmation has been sent already.</p>
+      <% else %>
+        <p class="bg-danger">Customer confirmation has not been sent yet.</p>
+      <% end %>
     <% end %>
   </div>
 </div>
