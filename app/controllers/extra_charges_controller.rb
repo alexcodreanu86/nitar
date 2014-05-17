@@ -10,7 +10,7 @@ class ExtraChargesController < ApplicationController
     if @extra_charge.save
       @trip = Trip.where(id: params[:trip_id]).first
       flash[:notice] = "Extra charge of #{@extra_charge.price}$ was added successfully"
-      redirect_to user_trip_path(@trip.user_id, @trip.id)
+      redirect_to non_user_show_path @trip
     else
       flash[:alert] = "Did not add extra charge, please make sure you fill out all fields"
       render "new"
@@ -28,7 +28,7 @@ class ExtraChargesController < ApplicationController
     if @extra_charge.save
       @trip = @extra_charge.trip
       flash[:notice] = "Extra charge of #{@extra_charge.price}$ was updated successfully"
-      redirect_to user_trip_path(@trip.user_id, @trip.id)
+      redirect_to non_user_show_path @trip
     else
       flash[:alert] = "Unable to update the extra charge, please make sure you fill out all fields"
       render "edit"
@@ -39,7 +39,7 @@ class ExtraChargesController < ApplicationController
     @extra_charge = ExtraCharge.where(id: params[:id]).first
     @trip = @extra_charge.trip
     @extra_charge.destroy
-    redirect_to user_trip_path(@trip.user_id, @trip.id)
+    redirect_to non_user_show_path @trip
   end
 
   protected
