@@ -13,6 +13,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     if @message.save
       flash[:notice] = "We have received your message, a representative will get back to you as soon as possible. Thank you for taking the time to reach out to us."
+      SpartanMailer.new_message(@message).deliver
     else
       flash[:alert] = "Failed to send your message, please make sure that all the fields are filled out."
     end

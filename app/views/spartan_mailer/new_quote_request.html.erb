@@ -1,0 +1,66 @@
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h3>New quote requested by <%= @trip.contact_name %>.</h3>   
+<div class="table-responsive">
+  <table class="table">
+    <tr>
+      <td>Pick up date/time:</td><td><%= @trip.pickup_time %></td>
+    </tr>
+
+    <tr>
+      <td>Pick up information:</td><td><%= @trip.pick_up %></td>
+    </tr>
+
+    <tr>
+      <td>Drop off information:</td> <td><%= @trip.drop_off %></td>
+    </tr>
+
+    <% if @trip.airport %>
+      <tr>
+        <td>Airport:</td><td><%= @trip.airport == 1 ? "Chicago O'hare (ORD)" : "Chicago Midway (MDW)" %></td>
+      </tr>
+    <% elsif @trip.hours%>
+      <tr>
+        <td>Hours booked</td> <td><%= @trip.hours %></td>
+      </tr>
+    <% end %>
+
+    <tr>
+      <td>Number of passengers:</td> <td><%= @trip.number_of_passengers %></td>
+    </tr>
+
+    <tr>
+      <td>Car type: </td><td><%= @trip.car.name %></td>
+    </tr>
+
+    <tr>
+      <td>Contact phone:</td> <td><%= @trip.contact_phone %></td>
+    </tr>
+
+    <tr>
+      <td>Contact email:</td> <td><%= @trip.contact_email %></td>
+    </tr>
+    <tr>
+      <td>Base price (no gratuity included):</td><td><%= number_to_currency(@trip.base_price) %></td>
+    </tr>
+    <% @trip.extra_charges.each do |charge| %>
+      <tr>
+        <td><%= charge.description %>:</td>
+        <td><%= number_to_currency(charge.price) %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td><strong>Total price:</strong></td><td><strong><%= number_to_currency(@trip.total_price) %></strong></td>
+    </tr>
+  </table>
+    <% if @trip.description != "" %>
+      <p>This extra information has been added to the trip: <br><%= @trip.description %></p>
+    <% end %>
+    <hr />
+    <p>You can view the trip at http://spartanlimousine.com<%= non_user_show_path(@trip) %></p>
+</div>
+</body>
+</html>
