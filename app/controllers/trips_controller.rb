@@ -65,7 +65,6 @@ class TripsController < ApplicationController
         @trip.base_price = Rate.calculate_base(trip_params, @car.price_ratio)
       end
     end
-
     if @trip.save
       flash[:notice] = "Thank you for booking a ride with us. One of our representatives will call you regarding the payment."
       redirect_to user_trip_path(@trip.user_id, @trip.id)
@@ -116,6 +115,8 @@ class TripsController < ApplicationController
   def send_confirmation
     @trip = Trip.where(id: params[:id]).first
     @message = params[:admin_message]
+    @trip.is_confirmed = true
+    @trip.save
     flash[:notice] = "Sent confirmation to #{@trip.contact_email}!"
     redirect_to non_user_show_path @trip
     SpartanMailer.send_customer_confirmation(@message, @trip).deliver
