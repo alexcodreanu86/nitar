@@ -1,0 +1,14 @@
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <p><strong>From:</strong><%= @message.sender_email %></p>
+  <p><strong>Subject:</strong><%= @message.subject %></p>
+  <hr />
+  <p><strong>Message:</strong></p>
+  <p><%= @message.content %></p>
+  <hr />
+  <p>You can view this message at http://spartanlimousine.com<%= message_path(@message) %></p>
+  </body>
+</html>
