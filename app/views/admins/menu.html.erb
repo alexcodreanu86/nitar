@@ -29,7 +29,7 @@
             </thead>
             <tbody>
               <% @future_trips.each do |trip| %>
-                <tr class="<%= trip.payment_information && (trip.driver_information && !trip.driver_information.empty?)  ? nil : 'danger'%>">
+                <tr class="<%= trip.payment_information && trip.is_confirmed && (trip.driver_information && !trip.driver_information.empty?)  ? nil : 'danger'%>">
                   <td><%= trip.id %></td>
                   <td><a href="<%= non_user_show_path trip %>"><%= trip.pickup_time.strftime("%a %b/%e/%Y - %T") %></a></td>
                   <td><%= trip.pick_up %></td>
@@ -56,7 +56,7 @@
             </thead>
             <tbody>
               <% @past_trips.each do |trip| %>
-                <tr>
+                <tr class="<%=  trip.is_confirmed ? nil : 'danger'%>">
                   <td><%= trip.id %></td>
                   <td><a href="<%= non_user_show_path trip %>"><%= trip.pickup_time.strftime("%a %b/%e/%Y - %T") %></a></td>
                   <td><%= trip.pick_up %></td>
