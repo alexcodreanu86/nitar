@@ -1,6 +1,9 @@
 SpartanLimo::Application.routes.draw do
   devise_for :users
   
+  get "/braintree/new_transaction", to: "braintree#new_transaction", as: "new_transaction"
+  post "/braintree/submit_transaction", to: "braintree#submit_transaction", as: "submit_transaction"
+
   get "trips/new_non_user", to: "trips#new_non_user", as: "new_non_user_trip"
   post "trips/create_non_user_trip",to: "trips#non_user_create", as: "trips"
   get "trips/non_user_show/:id", to: "trips#non_user_show", as: "non_user_show"
@@ -23,7 +26,10 @@ SpartanLimo::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   root to: "home#index"
-
+  get "home/disclaimer" , to: "home#disclaimer", as: "disclaimer"
+  get "home/privacy_notice", to: "home#privacy_notice", as: "privacy_notice"
+  get "home/terms", to: "home#terms", as: "terms"
+  
   get "/rates/calculate", to: "rates#calculate", as: "calculate_rate"
   get "/rates/hourly_quote", to: "rates#hourly_quote", as: "hourly_quote"
   
