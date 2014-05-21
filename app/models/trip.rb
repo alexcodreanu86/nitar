@@ -11,8 +11,8 @@ class Trip < ActiveRecord::Base
   def check_for_extras
     if (1..3).cover? self.trip_type.to_i     
       self.extra_charges.create(description: "MPEA Airport Tax", price: 4)
-      self.extra_charges.create(description: "Airport Greet(Domestic)", price: 30) if self.trip_type.to_i == 2
-      self.extra_charges.create(description: "Airport Greet(International)", price: 45) if self.trip_type.to_i == 3
+      self.extra_charges.create(description: "Airport Greet(Domestic)", price: 24) if self.trip_type.to_i == 2
+      self.extra_charges.create(description: "Airport Greet(International)", price: 40) if self.trip_type.to_i == 3
     else
       assign_total_price
     end
