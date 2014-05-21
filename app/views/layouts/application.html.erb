@@ -7,13 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= render "layouts/nav" %>
-
-  <div class="container">
-    <div class="row">
-      <% if flash[:notice] %>
-        <div class="col-lg-8 col-lg-offset-2">
+<div id="wrapper">
+  <div id="header">
+    <%= render "layouts/nav" %>
+  </div>
+  <div id="content">
+    <div class="container">
+      <div class="row">
+        <% if flash[:notice] %>
+          <div class="col-lg-8 col-lg-offset-2">
           <div class="alert alert-success fade in">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <p class><%= notice %></p>
@@ -21,7 +23,7 @@
           </div>
         </div>
       <% elsif flash[:alert] %>
-        <div class="col-lg-8 col-lg-offset-2">
+          <div class="col-lg-8 col-lg-offset-2">
           <div class="alert alert-danger fade in">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <p><%= alert %></p>
@@ -29,10 +31,13 @@
           </div>
         </div>
       <% end %>
-      <%= yield %>
+        <%= yield %>
+      </div>
     </div>
   </div>
-  
+  <div id="footer" align="center"> 
+    <%= render "layouts/footer" %>
+  </div>
   <!-- Modal -->
   <div class="modal fade" id="contact-modal" tabindex="-1" role="dialog" aria-labelledby="contact-modal-label" aria-hidden="true">
     <div class="modal-dialog">
@@ -86,6 +91,6 @@
       </div>
     </div>
   </div>
-
+</div>
 </body>
 </html>

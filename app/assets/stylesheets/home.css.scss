@@ -1,9 +1,12 @@
-body {
+html, body {
   background-image: url('city_image_light.jpeg');
   background-position:top center;
   background-repeat:no-repeat;
   background-attachment:fixed;
   font-family: "Times New Roman", Times, serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 .navbar {
@@ -118,4 +121,56 @@ li.right {
   box-sizing: border-box;
   width: 80%;
   border-collapse: collapse;
+}
+
+#wrapper {
+  min-height: 100%;
+  position: relative;
+}
+
+#header {
+  padding-bottom: 20px;
+}
+
+#content{
+  padding: 10px;
+  padding-bottom: 5em;
+}
+
+#footer{
+  min-height: 5em;
+  width:100%;
+  position: absolute;
+  bottom:0;
+  left: 0;
+
+  background-image: -ms-linear-gradient(top , #777 0%, #000000 100%);
+  background-image: -moz-linear-gradient(top , #777 0%, #000000 100%);
+  background-image: -o-linear-gradient(top , #777 0%, #000000 100%);
+  background-image: -webkit-gradient(linear,  top, left bottom, color-stop(0, #777), color-stop(1, #000000));
+  background-image: -webkit-linear-gradient(top , #777 0%, #000000 100%);
+  background-image: linear-gradient(to bottom , #777 0%, #000000 100%);
+}
+
+footer {
+  line-height: 5em;
+  padding-bottom: 0;
+  margin: 0 auto;
+  p{
+    margin-bottom: 0;
+    color: #eee;
+    display: inline-block;
+  }
+  #footer-list {
+    display: inline-block;
+    margin-bottom: 0;
+    padding-right: 20px;
+    li {
+      display: inline-block;
+      padding: 0 10px;
+      a {
+        color: #CC2913;
+      }
+    }
+  }
 }
