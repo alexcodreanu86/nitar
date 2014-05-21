@@ -8,33 +8,31 @@
 </head>
 <body>
 <div id="wrapper">
-  <div id="header">
-    <%= render "layouts/nav" %>
-  </div>
-  <div id="content">
-    <div class="container">
-      <div class="row">
-        <% if flash[:notice] %>
-          <div class="col-lg-8 col-lg-offset-2">
-          <div class="alert alert-success fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <p class><%= notice %></p>
-            <% flash[:noice] = nil %>
-          </div>
+  <%= render "layouts/nav" %>
+
+  <div class="container">
+    <div class="row">
+      <% if flash[:notice] %>
+        <div class="col-lg-8 col-lg-offset-2">
+        <div class="alert alert-success fade in">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <p class><%= notice %></p>
+          <% flash[:noice] = nil %>
         </div>
-      <% elsif flash[:alert] %>
-          <div class="col-lg-8 col-lg-offset-2">
-          <div class="alert alert-danger fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <p><%= alert %></p>
-            <% flash[:alert] = nil %>
-          </div>
-        </div>
-      <% end %>
-        <%= yield %>
       </div>
+    <% elsif flash[:alert] %>
+        <div class="col-lg-8 col-lg-offset-2">
+        <div class="alert alert-danger fade in">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <p><%= alert %></p>
+          <% flash[:alert] = nil %>
+        </div>
+      </div>
+    <% end %>
+      <%= yield %>
     </div>
   </div>
+
   <div id="footer" align="center"> 
     <%= render "layouts/footer" %>
   </div>
