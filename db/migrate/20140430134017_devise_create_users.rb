@@ -6,7 +6,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :encrypted_password, null: false, default: ""
 
       # Custom fields
-      t.string :name
+      t.string :first_name
+      t.string :last_name
       t.string :phone
       t.boolean :is_admin, default: false
       

@@ -4,7 +4,8 @@ class CreateTrips < ActiveRecord::Migration
       t.belongs_to :user
       t.belongs_to :car
       t.belongs_to :rate
-      t.string :contact_name
+      t.string :contact_first_name
+      t.string :contact_last_name
       t.string :contact_phone
       t.string :contact_email
       t.boolean :payment_information, default: false
