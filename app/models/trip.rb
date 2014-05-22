@@ -18,6 +18,10 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  def contact_name
+    "#{self.contact_first_name} #{self.contact_last_name}"
+  end
+
   def assign_total_price
     extras = self.extra_charges.map(&:price).inject(&:+) 
     self.total_price = self.base_price + (extras ? extras : 0) 
