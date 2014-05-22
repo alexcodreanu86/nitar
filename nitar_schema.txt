@@ -103,7 +103,10 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="rates" row="id" />
 </row>
-<row name="customer_name" null="1" autoincrement="0">
+<row name="customer_first_name" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="contact_last_name" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
 <row name="customer_phone" null="1" autoincrement="0">

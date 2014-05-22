@@ -10,6 +10,9 @@ SpartanLimo::Application.routes.draw do
   get "trips/toggle_payment/:id", to: "trips#toggle_payment", as: "toggle_trip_payment"
   get "trips/confirm_with_customer/:id", to: "trips#confirm_with_customer", as: "customer_confirmation"
   post "trips/send_confirmation/:id", to: "trips#send_confirmation", as: "send_customer_confirmation"
+  get "trips/add_payment/:id", to: "trips#add_payment", as: "add_payment"
+  post "trips/process_payment", to: "trips#process_payment", as: "process_payment"
+
   resources :users, only: [:index, :show, :destroy] do 
     resources :trips, only: [:index, :new, :create, :show]
     resources :trips, only: [:edit, :update, :destroy], shallow: true do

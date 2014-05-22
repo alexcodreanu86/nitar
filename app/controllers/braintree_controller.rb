@@ -4,15 +4,19 @@ class BraintreeController < ApplicationController
 
   def submit_transaction
     result = Braintree::Transaction.sale(
-      :amount => "1000.00",
+      :amount => params[:amount],
       :credit_card => {
+        :cardholder_name => params[:name],
         :number => params[:number],
         :cvv => params[:cvv],
         :expiration_month => params[:month],
         :expiration_year => params[:year]
       },
+      billing: {
+        :postal_code => params[:zip]
+      },
       :options => {
-        :submit_for_settlement => true
+        :submit_for_settlement =>  params[:charge]
       }
     )
     if result.success?

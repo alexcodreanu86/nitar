@@ -1,29 +1,5 @@
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
   <div class="well shaddowed">
-    <%= form_tag({controller: "braintree", action: "submit_transaction", method: "POST"}, id: 'braintree-payment-form') do %>
-      <div class="form-group">
-        <div><%= label_tag(:number, "CC#") %></div>
-        <div><%= text_field_tag :number,"", class: "form-control input-sm", size: 20 %></div>
-      </div>
-      <div class="form-group">
-        <div><%= label_tag(:cvv, "cvv") %></div>
-        <div><%= text_field_tag :cvv,"", class: "form-control input-sm", size: 4 %></div>
-      </div>
-      <div class="form-group">
-        <div><%= label_tag(:month, "Month") %></div>
-        <div><%= text_field_tag :month,"", class: "form-control input-sm", size: 2 %></div>
-      </div>
-      <div class="form-group">
-        <div><%= label_tag(:year, "Year") %></div>
-        <div><%= text_field_tag :year,"", class: "form-control input-sm", size: 4 %></div>
-      </div>
-      
-      <%= submit_tag("Send Confirmation", class: "btn btn-md btn-primary") %>
-    <% end %>
-    <script src="https://js.braintreegateway.com/v1/braintree.js"></script>
-    <script>
-      var braintree = Braintree.create("MIIBCgKCAQEAwBTdRFST9McvySEvsuedCzs/lAdrVk8eMHVMJ1RK2reASkkdHid4SZW7JU7gbGVcXuNHrYFk5jvWH+9auAiwV/orYx45AK3dUFFjJpcgZ6TFnwkf4hzrFG1eKtd80tiHEg5ATx4IMvpRrOK9HHgQkU/mdCr+wnoV4KErhnFr6FL+liszkXFG5Dwuh8kQywdYI/MUmFrbrKwQL8jbIR0TKfkAP/eT9G6aaF9+/OFQYdoh4ljjQmzJLxX8p3VFb49Z2y2vnM5rW2L9q+gr68TeUw7SYDUoEdH+30LYdv1s1WYxg0ikDfQLI/LcXNipdBF6FAw2XrCWItyqiGOQGnoi0QIDAQAB");
-      braintree.onSubmitEncryptForm('braintree-payment-form');
-    </script>
+    <%= render "braintree/payment_form" %>
   </div>
 </div>
