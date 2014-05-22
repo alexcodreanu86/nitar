@@ -1,0 +1,7 @@
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+  <div class="well shaddowed">
+    <%= form_tag("/braintree/submit_trip_transaction/#{ @trip.id }", method: "POST", id: 'braintree-payment-form') do %>
+      <%= render "braintree/trip_payment_form" %>
+    <% end %>
+  </div>
+</div>
