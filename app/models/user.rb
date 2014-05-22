@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :email, uniqueness: true
   has_many :trips
+
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
 end
