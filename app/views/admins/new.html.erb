@@ -5,8 +5,12 @@
       <div class="col-lg-8 col-lg-offset-2">
         <%= form_tag(controller: "admins", action: "create", method: "post")  do %>
           <div class="form-group">
-            <div><%= label_tag "admin_name" %></div>
-            <%= text_field :admin, :name, class: "form-control input-sm" %>
+            <div><%= label_tag "admin_first_name" %></div>
+            <%= text_field :admin, :first_name, class: "form-control input-sm" %>
+          </div>   
+          <div class="form-group">
+            <div><%= label_tag "admin_last_name" %></div>
+            <%= text_field :admin, :last_name, class: "form-control input-sm" %>
           </div>   
           <div class="form-group">
             <div><%= label_tag "admin_email" %></div>
