@@ -1,7 +1,9 @@
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
   <div class="well shaddowed">
-    <%= form_tag({controller: "braintree", action: "submit_transaction", method: "POST"}, id: 'braintree-payment-form') do %>
-      <%= render "braintree/payment_form" %>
-    <% end %>
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3">
+        <%= render "braintree/payment_form" %>
+      </div>
+    </div>
   </div>
 </div>

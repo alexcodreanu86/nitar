@@ -51,7 +51,6 @@ class BraintreeController < ApplicationController
         :submit_for_settlement =>  params[:charge]
       }
     )
-    binding.pry
     if result.success?
       @trip.transaction_id = result.transaction.id
       @trip.payment_information = true
@@ -64,4 +63,40 @@ class BraintreeController < ApplicationController
       redirect_to :back
     end
   end
+
+  def add_customer_information
+    @user = User.where(id:  params[:user_id]).first
+  end
+
+  def submit_customer_information
+    @user = User.where(id:  params[:user_id]).first
+    
+    result = Braintree::Customer.create(
+      :first_name => params[:first_name],
+      :last_name => params[:last_name],
+      :credit_card => {
+        :billing_address => {
+          :postal_code => params[:postal_code]
+        },
+        :number => params[:number],
+        :expiration_month => params[:month],
+        :expiration_year => params[:year],
+        :cvv => params[:cvv]
+      }
+    )
+    if result.success?
+      @user.customer_id = result.customer.id
+      @user.has_payment_information = true
+      @user.cc_last_four = result.customer.credit_cards.last.last_4
+      @user.cc_token = result.customer.credit_cards.last.token
+      @user.save
+
+      flash[:notice] = "Great success!"
+      redirect_to user_path(@user)
+    else
+      flash[:alert] = "Failed"
+      redirect_to :back
+    end
+  end
+
 end

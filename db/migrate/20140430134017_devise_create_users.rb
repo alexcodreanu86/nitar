@@ -10,7 +10,10 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :last_name
       t.string :phone
       t.boolean :is_admin, default: false
-      
+      t.boolean :has_payment_information, default: false
+      t.string :customer_id
+      t.string :cc_token
+      t.string :cc_last_four
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at

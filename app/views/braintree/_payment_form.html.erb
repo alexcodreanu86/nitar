@@ -1,3 +1,4 @@
+<%= form_tag({controller: "braintree", action: "submit_transaction", method: "POST"}, id: 'braintree-payment-form') do %>
 <div class="form-group">
   <div><%= label_tag(:name, "Card Holder Name") %></div>
   <div><%= text_field_tag :name,"", class: "form-control input-sm", autofocus: true %></div>
@@ -30,13 +31,16 @@
 </div>
 
 <div class="form-group">
-  <div><%= label_tag(:charge, "Charge now:") %><%= check_box_tag :charge, true,  class: "form-control input-sm" %></div>
+  <div><%= radio_button_tag(:charge, true) %>&nbsp;<%= label_tag(:charge_true, "Charge now") %><br>
+  <%= radio_button_tag(:charge, false, checked: true) %>&nbsp;<%= label_tag(:charge_false, "Charge later") %></div>
 </div>
 
 <%= submit_tag("Send Confirmation", class: "btn btn-md btn-primary") %>
 
+<% end %>
+
 <script src="https://js.braintreegateway.com/v1/braintree.js"></script>
 <script>
-var braintree = Braintree.create("MIIBCgKCAQEAwBTdRFST9McvySEvsuedCzs/lAdrVk8eMHVMJ1RK2reASkkdHid4SZW7JU7gbGVcXuNHrYFk5jvWH+9auAiwV/orYx45AK3dUFFjJpcgZ6TFnwkf4hzrFG1eKtd80tiHEg5ATx4IMvpRrOK9HHgQkU/mdCr+wnoV4KErhnFr6FL+liszkXFG5Dwuh8kQywdYI/MUmFrbrKwQL8jbIR0TKfkAP/eT9G6aaF9+/OFQYdoh4ljjQmzJLxX8p3VFb49Z2y2vnM5rW2L9q+gr68TeUw7SYDUoEdH+30LYdv1s1WYxg0ikDfQLI/LcXNipdBF6FAw2XrCWItyqiGOQGnoi0QIDAQAB");
+var braintree = Braintree.create(<%= ENV["CSE_KEY"] %>);
 braintree.onSubmitEncryptForm('braintree-payment-form');
 </script>
