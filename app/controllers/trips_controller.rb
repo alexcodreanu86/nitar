@@ -17,7 +17,7 @@ class TripsController < ApplicationController
 
   def new
     set_form_variables
-    @trip = Trip.new(params_from_generator.merge({ contact_name: current_user.name, contact_phone: current_user.phone, contact_email: current_user.email}))
+    @trip = Trip.new(params_from_generator.merge({ contact_first_name: current_user.first_name, contact_last_name: current_user.last_name, contact_phone: current_user.phone, contact_email: current_user.email}))
   end
 
   def non_user_show

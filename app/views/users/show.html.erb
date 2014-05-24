@@ -14,6 +14,11 @@
             <tr>
               <td>Phone number:</td><td><%= @user.phone %></td>
             </tr>
+            <% if @user.has_payment_information %>
+              <tr>
+                <td>Card on file:</td><td><%="*****#{@user.cc_last_four}" %></td>
+              </tr>
+            <% end %>
           </table>
         </div>
       </div>
@@ -22,6 +27,12 @@
       </div>
     </div>
     <p>List of <%= link_to "Booked Trips", user_trips_path(@user) %></p>
+    <% if @user.has_payment_information %>
+      <%= link_to "Change Card On File", add_customer_information_path(@user), class: "btn btn-primary" %>
+    <% else %>
+      <p class="bg-danger">You have no payment information on file yet.</p>
+      <%= link_to "Add Payment Information", add_customer_information_path(@user), class: "btn btn-primary" %>
+    <% end %>
 
   </div>
 </div>

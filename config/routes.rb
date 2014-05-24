@@ -3,6 +3,10 @@ SpartanLimo::Application.routes.draw do
   
   get "/braintree/new_transaction", to: "braintree#new_transaction", as: "new_transaction"
   post "/braintree/submit_transaction", to: "braintree#submit_transaction", as: "submit_transaction"
+  get "/braintree/new_trip_transaction/:trip_id", to: "braintree#new_trip_transaction", as: "new_trip_transaction"
+  post "/braintree/submit_trip_transaction/:trip_id", to: "braintree#submit_trip_transaction", as: "submit_trip_transaction"
+  get "/braintree/add_customer_information/:user_id", to: "braintree#add_customer_information", as: "add_customer_information"
+  post"/braintree/submit_customer_information/:user_id", to: "braintree#submit_customer_information", as: "submit_customer_information"
 
   get "trips/new_non_user", to: "trips#new_non_user", as: "new_non_user_trip"
   post "trips/create_non_user_trip",to: "trips#non_user_create", as: "trips"

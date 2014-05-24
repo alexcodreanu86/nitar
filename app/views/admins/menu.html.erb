@@ -3,6 +3,7 @@
     <div class="row" align="center">
     <h1>Admin's menu</h1>
       <div class="col-lg-8 col-lg-offset-2 ">
+        <%= link_to "Process a Payment ", new_transaction_path, class: "btn btn-primary btn-sm" %>
         <%= link_to "Customers List", users_path, class: "btn btn-primary btn-sm" %>
         <%= link_to "Add new admin", new_admin_path, class: "btn btn-primary btn-sm" %> 
         <%= link_to(messages_path, class: "btn btn-primary btn-sm") do %>
