@@ -27,6 +27,6 @@ class AdminsController < ApplicationController
   protected
 
   def admin_params
-    params.require(:admin).permit(:email, :phone, :name).merge(is_admin: true)
+    params.require(:admin).permit(:email, :phone, :first_name, :last_name).merge(is_admin: true)
   end
 end
