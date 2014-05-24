@@ -22,6 +22,8 @@ class CreateTrips < ActiveRecord::Migration
       t.float :hours
       t.integer :base_price
       t.float :total_price
+      t.string :transaction_id
+      t.string :cc_last_four  
 
       t.timestamps
     end

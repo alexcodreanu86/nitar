@@ -1,7 +1,7 @@
-<%= form_tag({controller: "braintree", action: "submit_transaction", method: "POST"}, id: 'braintree-payment-form') do %>
+<%= form_tag("/braintree/submit_trip_transaction/#{ @trip.id }", method: "POST", id: 'braintree-payment-form') do %>
 <div class="form-group">
   <div><%= label_tag(:name, "Card Holder Name") %></div>
-  <div><%= text_field_tag :name,"", class: "form-control input-sm", autofocus: true %></div>
+  <div><%= text_field_tag :name, @trip.contact_name, class: "form-control input-sm", autofocus: true %></div>
 </div>
 <div class="form-group">
   <div><%= label_tag(:number, "CC#") %></div>
@@ -25,10 +25,7 @@
   <div><%= text_field_tag :zip,"", class: "form-control input-sm" %></div>
 </div>
 
-<div class="form-group">
-  <div><%= label_tag(:amount, "Amount $") %></div>
-  <div><%= text_field_tag :amount,"", class: "form-control input-sm" %></div>
-</div>
+<h4>Total amount: $<%= @trip.total_price %></h4>
 
 <div class="form-group">
   <div><%= radio_button_tag(:charge, true) %>&nbsp;<%= label_tag(:charge_true, "Charge now") %><br>
@@ -38,7 +35,6 @@
 <%= submit_tag("Send Confirmation", class: "btn btn-md btn-primary") %>
 
 <% end %>
-
 <script src="https://js.braintreegateway.com/v1/braintree.js"></script>
 <script>
 var braintree = Braintree.create(<%= ENV["CSE_KEY"] %>);

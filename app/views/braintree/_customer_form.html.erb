@@ -1,0 +1,41 @@
+<h4><%= @user.name %></h4>
+<%= form_tag("/braintree/submit_customer_information/#{ @user.id }", method: "POST", id: 'braintree-payment-form') do %>
+<div class="form-group">
+  <div><%= label_tag(:first_name, "First Name") %></div>
+  <div><%= text_field_tag :first_name, @user.first_name, class: "form-control input-sm", autofocus: true %></div>
+</div>
+<div class="form-group">
+  <div><%= label_tag(:last_name, "Last Name") %></div>
+  <div><%= text_field_tag :last_name, @user.last_name, class: "form-control input-sm" %></div>
+</div>
+<div class="form-group">
+  <div><%= label_tag(:postal_code, "Billing Code") %></div>
+  <div><%= text_field_tag :postal_code,"", class: "form-control input-sm" %></div>
+</div>
+
+<div class="form-group">
+  <div><%= label_tag(:number, "CC#") %></div>
+  <div><%= text_field_tag :number,"", class: "form-control input-sm", size: 20 %></div>
+</div>
+<div class="form-group">
+  <div><%= label_tag(:cvv, "cvv") %></div>
+  <div><%= text_field_tag :cvv,"", class: "form-control input-sm", size: 4 %></div>
+</div>
+<div class="form-group">
+  <div><%= label_tag(:month, "Expiration Month") %></div>
+  <div><%= text_field_tag :month,"", class: "form-control input-sm", size: 2 %></div>
+</div>
+<div class="form-group">
+  <div><%= label_tag(:year, "Expiration Year") %></div>
+  <div><%= text_field_tag :year,"", class: "form-control input-sm", size: 4 %></div>
+</div>
+
+<%= submit_tag("Send Confirmation", class: "btn btn-md btn-primary") %>
+
+<% end %>
+
+<script src="https://js.braintreegateway.com/v1/braintree.js"></script>
+<script>
+var braintree = Braintree.create(<%= ENV["CSE_KEY"] %>);
+braintree.onSubmitEncryptForm('braintree-payment-form');
+</script>
