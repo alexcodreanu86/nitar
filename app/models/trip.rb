@@ -4,7 +4,7 @@ class Trip < ActiveRecord::Base
   belongs_to :rate
   has_many :extra_charges, dependent: :destroy
 
-  validates :trip_type, :car_id, :number_of_passengers, :pickup_time, :pick_up, :drop_off, :contact_name, :contact_phone, :contact_email, presence: true
+  validates :trip_type, :car_id, :number_of_passengers, :pickup_time, :pick_up, :drop_off, :contact_first_name, :contact_last_name, :contact_phone, :contact_email, presence: true
 
   after_create :check_for_extras
 
@@ -16,6 +16,10 @@ class Trip < ActiveRecord::Base
     else
       assign_total_price
     end
+  end
+
+  def contact_name
+    "#{self.contact_first_name} #{self.contact_last_name}"
   end
 
   def assign_total_price

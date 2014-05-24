@@ -1,45 +1,52 @@
 <div class="col-lg-8 col-lg-offset-2">
   <div class="well shaddowed">
+    <div class="row">
+      <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= devise_error_messages! %>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
+      <div class="col-lg-6">
+        <div class="form-group"><%= f.label :first_name %><br />
+          <%= f.text_field :first_name, autofocus: true, class: "form-control input-sm"%></div>
 
-    <div class="col-lg-6">
-      <div class="form-group"><%= f.label :name %><br />
-      <%= f.text_field :name, autofocus: true, class: "form-control input-sm"%></div>
+        <div class="form-group"><%= f.label :last_name %><br />
+          <%= f.text_field :last_name, autofocus: true, class: "form-control input-sm"%></div>
 
-      <div class="form-group"><%= f.label :email %><br />
-      <%= f.email_field :email, class: "form-control input-sm"%></div>
+        <div class="form-group"><%= f.label :email %><br />
+          <%= f.email_field :email, class: "form-control input-sm"%></div>
 
-      <div class="form-group"><%= f.label :phone, "Phone Number" %><br/>
-      <%= f.telephone_field :phone, class: "form-control input-sm" %></div>
-    </div>
+        <div class="form-group"><%= f.label :phone, "Phone Number" %><br/>
+          <%= f.telephone_field :phone, class: "form-control input-sm" %></div>
+      </div>
 
-    
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+      <div class="col-lg-6">
+        <div class="form-group"><%= f.label :current_password %> <i>(needed to update your information)</i><br />
+          <%= f.password_field :current_password, autocomplete: "off", class: "form-control input-sm" %></div>
+
+        <div class="form-group"><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+          <%= f.password_field :password, autocomplete: "off", class: "form-control input-sm" %></div>
+
+        <div class="form-group"><%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control input-sm" %></div>
+
+        <div><%= f.submit "Update", class: 'btn red-button' %></div>
+
+      </div>
+
     <% end %>
-    <div class="col-lg-6">
-      <div class="form-group"><%= f.label :current_password %> <i>(needed to update your information)</i><br />
-        <%= f.password_field :current_password, autocomplete: "off", class: "form-control input-sm" %></div>
-
-      <div class="form-group"><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-        <%= f.password_field :password, autocomplete: "off", class: "form-control input-sm" %></div>
-
-      <div class="form-group"><%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control input-sm" %></div>
     </div>
+    <div class="row">
+      <h3>Cancel my account</h3>
 
-    <div><%= f.submit "Update", class: 'btn red-button' %></div>
-  <% end %>
+      <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
 
-  <h3>Cancel my account</h3>
-
-  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger' %></p>
-
-  <%= link_to "Back", :back %>
+      <%= link_to "Back", :back %>
+    </div>
   </div>
 </div>
