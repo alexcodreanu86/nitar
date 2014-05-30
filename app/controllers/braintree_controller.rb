@@ -1,4 +1,5 @@
 class BraintreeController < ApplicationController
+  before_filter :authorize_admin
   def new_transaction
   end
 
