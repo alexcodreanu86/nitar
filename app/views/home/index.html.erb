@@ -1,8 +1,7 @@
 <div class="row index-content">
   <div class="col-lg-8">
-    <div class="well sidebar-nav shaddowed" align="center">
-      <p id="fleet-banner">Our Fleet</p>
-
+    <div class="well sidebar-nav shaddowed" align="center" id="fleet-banner">
+      <p>Our Fleet</p>
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
@@ -41,7 +40,7 @@
     </div>
   </div>
 
-  <div class="col-lg-3 col-lg-offset-1">
+  <div class="col-lg-3 col-lg-offset-1 col-xs-12">
     <div class="well sidebar-nav shaddowed" id="rate-finder" align="center">
       <h3>Find Rate Here</h3>
       <%= form_tag(current_user ? new_user_trip_path(current_user.id) : new_non_user_trip_path, method: "GET", role: 'form', id: "instant-quote") do  %>
@@ -65,17 +64,6 @@
       <div class="price-response"></div>
     </div>
   </div>
-</div>
-<div class="row">
-    <div class="well shaddowed">
-      <h2 id="about-us">About Us:</h2>
-      <p>
-        Spartan Limousine is a New Company with New ideas.
-        Our competitive rates, high-quality cars and professional drivers  will make the trip a wonderful experience for you and your guests. You’ll always find complimentary beverages, current newspapers and magazines waiting inside. 
-        Our skilled and highly qualified drivers make it a point to ensure that their personal appearance matches the class and style of the vehicle that will transport you to your destination. 
-        Whether it is a trip to or from a Chicago airport, a corporate event, a trip to one of the many casinos, or it is one of the special days of your life such as a wedding, prom, graduation, or birthday, Spartan Limousine is here to serve all your transportation need. Your satisfaction is important to us.
-      </p>
-    </div>
 </div>
 
 <script type="text/javascript">
