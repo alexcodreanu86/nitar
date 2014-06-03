@@ -20,7 +20,7 @@
         <%= select_tag :number_of_passengers, options_for_select(@passengers, @trip.number_of_passengers), {class: "form-control required input-sm", onblur:"checkFormElementStatus()"} %>
       </div>
 
-      <div class="form-group"><div><%= f.label :pickup_time %></div>
+      <div class="form-group"><div><%= f.label :pickup_time, "Pickup Date & Time" %></div>
       <%= f.datetime_local_field :pickup_time, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
       <div class="form-group"><div><%= f.label :pick_up, "Pick up address" %></div>
       <%= f.text_field :pick_up, class: "form-control required input-sm", placeholder: "e.g. 1 S. Dearbord Chicago IL 60001", onblur:"checkFormElementStatus()" %></div>
