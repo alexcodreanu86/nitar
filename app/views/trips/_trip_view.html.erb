@@ -2,7 +2,7 @@
 <div class="table-responsive">
   <table class="table">
     <tr>
-      <td>Pick up date/time:</td><td><%= @trip.pickup_time %></td>
+      <td>Pick up date/time:</td><td><%= @trip.pickup_time.strftime("%a %b/%e/%Y - %I:%M %p") %></td>
     </tr>
 
     <tr>
