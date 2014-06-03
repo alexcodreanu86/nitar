@@ -1,11 +1,19 @@
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
   <div class="well shaddowed">
+    <div align="center">
+      <h1>Spartan Limousine</h1>
+      <a href="https://spartanlimousine.com">www.SpartanLimousine.com</a>
+      <p style="color:red;">(773)934-1755</p>
+    </div>
     <h4>Below is your trip confirmation. Thank you very much for your business.</h4>
     <% if !(@message && @message.empty?) %>
       <p><%= @message %></p>
     <% end %>
     <hr />
     <%= render "trips/trip_view" %>
-  <p>You can view the trip at http://spartanlimousine.com<%= non_user_show_path(@trip) %></p>
+    <hr>
+    <p>Please reply if any changes occur.<br>
+    Thank you for your business.<br>
+    Niter INC.</p>
 </div>
 </div>
