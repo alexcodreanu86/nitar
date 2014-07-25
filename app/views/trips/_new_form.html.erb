@@ -43,11 +43,42 @@
       <%= f.telephone_field :contact_phone, class: "form-control required input-sm", onblur:"checkFormElementStatus()" %></div>
 
       <div class="form-group"><div><%= f.label :description, 'Anything else that we should know' %></div>
-      <%= f.text_area :description, cols: 40, rows: 4, class: "form-control input-sm", onblur:"checkFormElementStatus()"%></div> 
+      <%= f.text_area :description, cols: 40, rows: 4, class: "form-control input-sm", onblur:"checkFormElementStatus()"%></div>
+
+      <div class="form-group"><div>
+        <p>
+          <%= f.check_box :confirmed_agreement %>
+          I agree with the <%= link_to "Terms & Conditions!", terms_path, id: "terms-agreement-link" %></a>
+        </p>
+      </div></div>
+      
     </div>
 
     <div class="row"> 
       <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3"><%= submit_tag "Submit Reservation", class: "btn btn-default btn-lg", id: "trip-button" %></div>
     </div>
   <% end %>
+  <div data-id="terms-output"></div>
 </div>
+
+<script>
+  function checkAgreedStatus(){
+    var checkbox = document.getElementById('trip_confirmed_agreement')
+    if (checkbox.checked){
+      document.getElementById('trip-button').disabled=false
+    }else{
+      document.getElementById('trip-button').disabled=true
+    }
+  }
+  checkAgreedStatus()
+  $('#trip_confirmed_agreement').change(function(){ checkAgreedStatus() })
+
+  $('#terms-agreement-link').on('click', function(e){
+    e.preventDefault()
+    var url = $(this).attr('href')
+    console.log(url)
+    $.get(url, function(response){
+      $('[data-id=terms-output]').html(response)
+    })
+  })
+</script>
