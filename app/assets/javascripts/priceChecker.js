@@ -31,7 +31,6 @@ function typeSelection(choice){
     $("#airport").show(170);
     $("#rate_id").show();
     $("#hours").hide();
-
   }
   checker.checkFormStatus();
 }
