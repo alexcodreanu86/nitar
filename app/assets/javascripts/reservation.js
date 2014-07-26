@@ -78,3 +78,49 @@ function pointToPoint(){
   $('#rate_id').show();
   nonAirportTrip()
 }
+/***************************************************************************
+ * Terms and Conditions
+ * *************************************************************************/
+
+function checkAgreedStatus(){
+  var checkbox = document.getElementById('trip_confirmed_agreement');
+  if (checkbox.checked){
+    enableButton();
+  }else{
+    disableButton();
+  };
+};
+
+function enableButton(){
+  document.getElementById('trip-button').disabled=false;
+};
+
+function disableButton(){
+  document.getElementById('trip-button').disabled=true;
+};
+
+
+$(document).on('click', '#terms-agreement-link', function(e){
+  e.preventDefault()
+  var url = $(this).attr('href')
+  console.log (areTermsLoaded())
+  toggleTerms()
+  if (!areTermsLoaded()){
+    loadTermsAndConditions(url)
+  }
+})
+
+function areTermsLoaded(){
+  return $("[data-id=terms-output]").html() != ""
+}
+
+function toggleTerms(){
+  $("[data-id=terms-output]").toggle(300)
+}
+
+function loadTermsAndConditions(url){
+  $.get(url, function(response){
+    $('[data-id=terms-output]').html(response)
+    toggleTerms()
+  })
+}
