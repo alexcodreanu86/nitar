@@ -62,23 +62,6 @@
 </div>
 
 <script>
-  function checkAgreedStatus(){
-    var checkbox = document.getElementById('trip_confirmed_agreement')
-    if (checkbox.checked){
-      document.getElementById('trip-button').disabled=false
-    }else{
-      document.getElementById('trip-button').disabled=true
-    }
-  }
-  checkAgreedStatus()
+  checkAgreedStatus();
   $('#trip_confirmed_agreement').change(function(){ checkAgreedStatus() })
-
-  $('#terms-agreement-link').on('click', function(e){
-    e.preventDefault()
-    var url = $(this).attr('href')
-    console.log(url)
-    $.get(url, function(response){
-      $('[data-id=terms-output]').html(response)
-    })
-  })
 </script>
