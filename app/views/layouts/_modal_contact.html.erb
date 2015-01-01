@@ -6,43 +6,43 @@
           <h4 class="modal-title" id="myModalLabel">Contact menu:</h4>
         </div>
         <div class="modal-body">
-          <div class="row"> 
+          <div class="row">
             <div class="col-lg-10 col-lg-offset-1" align="center" >
-              <h3>You can reach us by</h3>    
+              <h3>You can reach us by</h3>
               <table class="contact-information">
                 <tbody>
                   <tr>
-                    <td>Phone: </td><td>224-999-2039</td>
+                    <td>Phone: </td><td>773-934-1755</td>
                   <tr/>
                   <tr>
                     <td>Email: </td><td>SpartanLimousineChicago@gmail.com</td>
                   </tr>
                 </tbody>
               </table>
-            </div>       
+            </div>
           </div>
-          <div class="row"> 
+          <div class="row">
             <div class="col-lg-10 col-lg-offset-1" align="center" >
               <h3>Or you can send us a message from here:</h3>
-            </div>       
+            </div>
           </div>
-          <div class="row"> 
+          <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
               <%= form_for current_user ?  Message.new(sender_email: current_user.email) : Message.new do |f| %>
                 <div class="form-group">
                   <div><%= f.label :sender_email, "Your email" %></div>
-                  <div><%= f.email_field  :sender_email, class: "form-control input-sm" %></div> 
+                  <div><%= f.email_field  :sender_email, class: "form-control input-sm" %></div>
                 </div>
                 <div class="form-group">
                   <div><%= f.label :subject %></div>
-                  <div><%= f.text_field :subject, class: "form-control input-sm" %></div> 
+                  <div><%= f.text_field :subject, class: "form-control input-sm" %></div>
                 </div>
                 <div class="form-group">
                   <div><%= f.label :content, "Message" %></div>
-                  <div><%= f.text_area :content, class: "form-control input-sm", rows: 5 %></div> 
+                  <div><%= f.text_area :content, class: "form-control input-sm", rows: 5 %></div>
                 </div>
               <% end %>
-            </div>       
+            </div>
           </div>
         </div>
         <div class="modal-footer">
