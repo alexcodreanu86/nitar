@@ -44,8 +44,8 @@ class TripsController < ApplicationController
     end
 
     if @trip.save
-      email = SpartanMailer.new_quote_request(@trip)
-      email.deliver
+      # email = SpartanMailer.new_quote_request(@trip)
+      # email.deliver
       flash[:notice] = "Thank you for booking a ride with us. One of our representatives will call you regarding the payment."
       redirect_to non_user_show_path @trip
     else
@@ -68,8 +68,8 @@ class TripsController < ApplicationController
     if @trip.save
       flash[:notice] = "Thank you for booking a ride with us. One of our representatives will call you regarding the payment."
       redirect_to user_trip_path(@trip.user_id, @trip.id)
-      email = SpartanMailer.new_quote_request(@trip.id)
-      email.deliver
+      # email = SpartanMailer.new_quote_request(@trip.id)
+      # email.deliver
     else
       flash[:alert] = "Please make sure that you fill out all the required fields!" 
       set_form_variables
